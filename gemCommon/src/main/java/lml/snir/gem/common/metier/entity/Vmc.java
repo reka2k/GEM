@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package lml.snir.gem.entity;
+package lml.snir.gem.common.metier.entity;
 
 /**
  *
  * @author saturne
  */
-public class vmc {
+public class Vmc {
     
      private int statut;
      private CapteurTemperature capteurTemperature;
@@ -37,9 +37,9 @@ public class vmc {
     }
 
     /**
-     * @param Statut the Statut to set
+     * @param statut the Statut to set
      */
-    public void setStatut(int Statut) {
+    public void setStatut(int statut) {
         this.statut = statut;
     }
 
