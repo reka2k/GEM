@@ -6,6 +6,8 @@
 
 package lml.snir.gem.metier.entity;
 
+import lml.snir.gem.common.metier.entity.CompteurContrat;
+
 /**
  *
  * @author lml
