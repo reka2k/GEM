@@ -12,7 +12,7 @@ package lml.snir.gem.common.metier.entity;
  */
 public class Chauffage {
     
-    private boolean Statut;
+    private boolean statut;
     private Compteur compteur;
     private boolean heureCreuse;
     private boolean heurePleine;
@@ -29,7 +29,7 @@ public void demarrer(){
     /**
      * @return the Statut
      */
-    public boolean isStatut() {
+    public boolean getStatut() {
         return Statut;
     }
 
@@ -37,7 +37,7 @@ public void demarrer(){
      * @param Statut the Statut to set
      */
     public void setStatut(boolean Statut) {
-        this.Statut = Statut;
+        this.statut = statut;
     }
 
     /**
