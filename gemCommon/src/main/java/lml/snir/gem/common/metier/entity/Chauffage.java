@@ -8,7 +8,7 @@ package lml.snir.gem.common.metier.entity;
 
 /**
  *
- * @author saturne
+ * @author Ethan 
  */
 public class Chauffage {
     

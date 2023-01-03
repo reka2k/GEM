@@ -7,7 +7,7 @@ package lml.snir.gem.common.metier.entity;
 
 /**
  *
- * @author lml
+ * @author Kelyan Ruas
  */
 public class User {
 
