@@ -30,13 +30,13 @@ public void demarrer(){
      * @return the Statut
      */
     public boolean getStatut() {
-        return Statut;
+        return statut;
     }
 
     /**
-     * @param Statut the Statut to set
+     * @param statut the Statut to set
      */
-    public void setStatut(boolean Statut) {
+    public void setStatut(boolean statut) {
         this.statut = statut;
     }
 
