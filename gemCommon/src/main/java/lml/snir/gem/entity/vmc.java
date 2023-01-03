@@ -12,7 +12,7 @@ package lml.snir.gem.entity;
  */
 public class vmc {
     
-     private int Statut;
+     private int statut;
      private CapteurTemperature capteurTemperature;
      private CapteurHumidite capteurHumidite;
      private float humidite;
@@ -33,14 +33,14 @@ public class vmc {
      * @return the Statut
      */
     public int getStatut() {
-        return Statut;
+        return statut;
     }
 
     /**
      * @param Statut the Statut to set
      */
     public void setStatut(int Statut) {
-        this.Statut = Statut;
+        this.statut = statut;
     }
 
     /**
