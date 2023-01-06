@@ -6,6 +6,7 @@
 
 package lml.snir.gem.common.metier.transactionel;
 
+import java.util.List;
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.persistence.CrudService;
 
@@ -14,5 +15,5 @@ import lml.snir.persistence.CrudService;
  * @author lml
  */
 public interface UserService extends CrudService<User> {
-    //Ajout méthode a voir ensemble
+    public List<User> getByLogin(String login) throws Exception;
 }

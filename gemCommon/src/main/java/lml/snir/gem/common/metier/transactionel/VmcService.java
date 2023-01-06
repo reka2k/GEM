@@ -6,6 +6,7 @@
 
 package lml.snir.gem.common.metier.transactionel;
 
+import java.util.List;
 import lml.snir.persistence.CrudService;
 import lml.snir.gem.common.metier.entity.Vmc;
 
@@ -14,5 +15,5 @@ import lml.snir.gem.common.metier.entity.Vmc;
  * @author lml
  */
 public interface VmcService extends CrudService<Vmc> {
-    //Ajout méthode a voir ensemble
+    public List<Vmc> getById(int id) throws Exception;
 }
