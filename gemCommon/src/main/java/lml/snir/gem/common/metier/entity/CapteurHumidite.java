@@ -3,40 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package lml.snir.gem.common.metier.entity;
-
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+
 /**
  *
  * @author saturne
  */
 @Entity
 public class CapteurHumidite implements Serializable {
-    
+
     @Id
     private long id;
     private char[] mesure;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;
     private float humidite;
-    
 
- 
-    public CapteurHumidite(){
-        
+    public CapteurHumidite() {
+
     }
-    
-    public void ExtraireDonneeTrame(){
-    
+
+    public void ExtraireDonneeTrame() {
+
     }
-    
-    
+
     /**
      * @return the mesure
      */
@@ -92,5 +88,5 @@ public class CapteurHumidite implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-    
+
 }

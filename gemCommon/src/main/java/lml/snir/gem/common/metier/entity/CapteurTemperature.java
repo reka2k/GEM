@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
@@ -18,7 +17,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class CapteurTemperature implements Serializable {
-    
+
     @Id
     private long id;
     private char[] mesure;
@@ -26,13 +25,14 @@ public class CapteurTemperature implements Serializable {
     private Date date;
     private float temperature;
 
-    public CapteurTemperature(){
-        
+    public CapteurTemperature() {
+
     }
-    public void ExtraireDonneeTrame(){
-    
+
+    public void ExtraireDonneeTrame() {
+
     }
-    
+
     /**
      * @return the mesure
      */
@@ -88,5 +88,5 @@ public class CapteurTemperature implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-    
+
 }

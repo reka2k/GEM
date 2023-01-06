@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
@@ -15,29 +14,31 @@ import javax.persistence.Id;
  * @author Ethan
  */
 @Entity
-public class Vmc implements Serializable{
-    
+public class Vmc implements Serializable {
+
     @Id
     private long id;
-     private int statut;
-     private CapteurTemperature capteurTemperature;
-     private CapteurHumidite capteurHumidite;
-     private float humidite;
-     private float temperature;
-     
-     
-     public Vmc(){
-         
-     }
- public void stop(){
-     
- }
- public void petiteVitesse(){
-     
- }
- public void grandeVitesse(){
-     
- }
+    private int statut;
+    private CapteurTemperature capteurTemperature;
+    private CapteurHumidite capteurHumidite;
+    private float humidite;
+    private float temperature;
+
+    public Vmc() {
+
+    }
+
+    public void stop() {
+
+    }
+
+    public void petiteVitesse() {
+
+    }
+
+    public void grandeVitesse() {
+
+    }
 
     /**
      * @return the Statut
