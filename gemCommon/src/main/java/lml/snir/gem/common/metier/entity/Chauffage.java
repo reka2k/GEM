@@ -26,6 +26,14 @@ public class Chauffage implements Serializable {
     public Chauffage() {
 
     }
+    
+     public Chauffage(boolean statut,Compteur compteur,boolean heureCreuse,boolean heurePleine) {
+         this.statut = statut;
+         this.compteur = compteur;
+         this.heureCreuse = heureCreuse;
+         this.heurePleine = heurePleine;
+
+    }
 
     public void eteindre() {
 

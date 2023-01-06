@@ -28,6 +28,13 @@ public class CapteurTemperature implements Serializable {
     public CapteurTemperature() {
 
     }
+    
+    public CapteurTemperature(char[] mesure,Date date,float temperature) {
+        this.mesure = mesure;
+        this.date = date;
+        this.temperature = temperature;
+
+    }
 
     public void ExtraireDonneeTrame() {
 

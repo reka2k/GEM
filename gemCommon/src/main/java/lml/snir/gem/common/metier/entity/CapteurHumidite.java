@@ -28,6 +28,13 @@ public class CapteurHumidite implements Serializable {
     public CapteurHumidite() {
 
     }
+    
+      public CapteurHumidite(char[] mesure,Date date,float humidite) {
+          this.mesure = mesure;
+          this.date = date;
+          this.humidite = humidite;
+
+    }
 
     public void ExtraireDonneeTrame() {
 

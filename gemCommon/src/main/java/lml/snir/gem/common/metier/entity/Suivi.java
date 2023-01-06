@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -15,11 +16,20 @@ public class Suivi implements Serializable {
     @Id
     private long id;
     private User user;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;   
     private String action;
     private Vmc vmc;
 
     public Suivi(){
+        
+    }
+    
+     public Suivi(User user,Date date,String action,Vmc vmc){
+         this.user = user;
+         this.date = date;
+         this.action = action;
+         this.vmc = vmc;
         
     }
     /**
