@@ -18,6 +18,9 @@ public class CapteurTemperature {
     private Date date;
     private float temperature;
 
+    public CapteurTemperature(){
+        
+    }
     public void ExtraireDonneeTrame(){
     
     }

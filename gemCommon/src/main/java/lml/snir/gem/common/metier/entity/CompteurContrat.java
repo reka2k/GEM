@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package lml.snir.gem.metier.entity;
+package lml.snir.gem.common.metier.entity;
 
 /**
  *

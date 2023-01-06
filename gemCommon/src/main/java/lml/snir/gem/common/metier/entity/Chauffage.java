@@ -17,7 +17,9 @@ public class Chauffage {
     private boolean heureCreuse;
     private boolean heurePleine;
     
-    
+    public Chauffage(){
+        
+    }
 public void eteindre(){
     
 }

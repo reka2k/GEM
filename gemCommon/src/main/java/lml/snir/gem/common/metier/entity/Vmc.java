@@ -19,6 +19,9 @@ public class Vmc {
      private float temperature;
      
      
+     public Vmc(){
+         
+     }
  public void stop(){
      
  }

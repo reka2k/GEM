@@ -18,9 +18,15 @@ public class CapteurHumidite {
     private Date date;
     private float humidite;
 
+ 
+    public CapteurHumidite(){
+        
+    }
+    
     public void ExtraireDonneeTrame(){
     
     }
+    
     
     /**
      * @return the mesure

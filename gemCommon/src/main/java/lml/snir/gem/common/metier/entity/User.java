@@ -5,21 +5,21 @@
  */
 package lml.snir.gem.common.metier.entity;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 /**
  *
  * @author Kelyan Ruas
  */
 public class User {
 
-    private String nom;
+    private String nom;    
     private String prenom;
     private String login;
     private String mdp;
     private int id;
 
+    public User(){
+        
+    }
     /**
      * @return the nom
      */
@@ -73,7 +73,7 @@ public class User {
      * @param mdp the mdp to set
      */
     public void setMdp(String mdp) {
-        this.mdp = hashPassword(mdp);
+        this.mdp = mdp;
     }
 
     /**
@@ -90,22 +90,10 @@ public class User {
         this.id = id;
     }
 
-    public static String hashPassword(String password) {
-    String hashedPassword = null;
-    try {
-      MessageDigest md = MessageDigest.getInstance("SHA-256");
-      md.update(password.getBytes());
-      byte[] bytes = md.digest();
-      StringBuilder sb = new StringBuilder();
-      for(int i=0; i< bytes.length ;i++) {
-        sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-      }
-      hashedPassword = sb.toString();
-    } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
+    public String encryptedMdp(String mdp) {
+        //A completer
+        this.mdp = mdp + 1;
+        return mdp;
     }
-    return hashedPassword;
-
-}
 
 }
