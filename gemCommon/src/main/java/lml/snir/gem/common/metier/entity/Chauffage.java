@@ -6,12 +6,18 @@
 
 package lml.snir.gem.common.metier.entity;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Ethan 
  */
-public class Chauffage {
-    
+@Entity
+public class Chauffage implements Serializable {
+    @Id
+    private long id;
     private boolean statut;
     private Compteur compteur;
     private boolean heureCreuse;
@@ -80,5 +86,19 @@ public void demarrer(){
      */
     public void setHeurePleine(boolean heurePleine) {
         this.heurePleine = heurePleine;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 }
