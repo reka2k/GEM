@@ -21,5 +21,11 @@
             <version>8.0.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>lml.snir.persistence</groupId>
+            <artifactId>LMLPersistence</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
