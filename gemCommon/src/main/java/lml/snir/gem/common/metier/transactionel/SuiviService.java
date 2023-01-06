@@ -6,7 +6,10 @@
 
 package lml.snir.gem.common.metier.transactionel;
 
+import java.util.Date;
+import java.util.List;
 import lml.snir.gem.common.metier.entity.Suivi;
+import lml.snir.gem.common.metier.entity.User;
 import lml.snir.persistence.CrudService;
 
 /**
@@ -14,5 +17,6 @@ import lml.snir.persistence.CrudService;
  * @author lml
  */
 public interface SuiviService extends CrudService<Suivi> {
-    //Ajout méthode a voir ensemble
+    public List<Suivi> getByUser(User user) throws Exception;
+    public List<Suivi> getByDate(Date date) throws Exception;
 }

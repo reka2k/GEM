@@ -14,5 +14,5 @@ import lml.snir.persistence.CrudService;
  * @author lml
  */
 public interface ChauffageService extends CrudService<Chauffage>{
-    //Ajout méthode a voir ensemble
+    //Aucune méthode
 }
