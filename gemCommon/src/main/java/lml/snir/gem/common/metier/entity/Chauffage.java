@@ -23,7 +23,9 @@ public class Chauffage implements Serializable {
     private boolean heureCreuse;
     private boolean heurePleine;
     
-    
+    public Chauffage(){
+        
+    }
 public void eteindre(){
     
 }

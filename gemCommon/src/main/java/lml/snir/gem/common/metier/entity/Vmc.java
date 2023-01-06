@@ -26,6 +26,9 @@ public class Vmc implements Serializable{
      private float temperature;
      
      
+     public Vmc(){
+         
+     }
  public void stop(){
      
  }

@@ -26,6 +26,9 @@ public class CapteurTemperature implements Serializable {
     private Date date;
     private float temperature;
 
+    public CapteurTemperature(){
+        
+    }
     public void ExtraireDonneeTrame(){
     
     }

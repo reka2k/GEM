@@ -27,9 +27,15 @@ public class CapteurHumidite implements Serializable {
     private float humidite;
     
 
+ 
+    public CapteurHumidite(){
+        
+    }
+    
     public void ExtraireDonneeTrame(){
     
     }
+    
     
     /**
      * @return the mesure

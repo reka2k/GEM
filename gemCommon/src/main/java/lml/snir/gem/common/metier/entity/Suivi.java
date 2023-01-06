@@ -15,10 +15,13 @@ public class Suivi implements Serializable {
     @Id
     private long id;
     private User user;
-    private Date date;
+    private Date date;   
     private String action;
     private Vmc vmc;
 
+    public Suivi(){
+        
+    }
     /**
      * @return the id
      */
