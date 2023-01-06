@@ -1,0 +1,8 @@
+lml/snir/gem/common/metier/entity/User.class
+lml/snir/gem/common/metier/entity/Suivi.class
+lml/snir/gem/common/metier/entity/CompteurContrat.class
+lml/snir/gem/common/metier/entity/Compteur.class
+lml/snir/gem/common/metier/entity/CapteurHumidite.class
+lml/snir/gem/common/metier/entity/Vmc.class
+lml/snir/gem/common/metier/entity/Chauffage.class
+lml/snir/gem/common/metier/entity/CapteurTemperature.class

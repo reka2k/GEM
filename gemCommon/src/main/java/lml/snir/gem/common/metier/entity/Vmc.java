@@ -27,6 +27,14 @@ public class Vmc implements Serializable {
     public Vmc() {
 
     }
+    
+    public Vmc(int statut,CapteurTemperature capteurTemperature,CapteurHumidite capteurHumidite,float humidite,float temperature) {
+        this.capteurTemperature = capteurTemperature;
+        this.capteurHumidite = capteurHumidite;
+        this.humidite = humidite;
+        this.temperature = temperature;
+
+    }
 
     public void stop() {
 
