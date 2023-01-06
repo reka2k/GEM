@@ -5,21 +5,30 @@
  */
 package lml.snir.gem.common.metier.entity;
 
+
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Kelyan Ruas
  */
-public class User {
+@Entity
+public class User implements Serializable{
 
+    @Id
+    private long id;
     private String nom;
     private String prenom;
     private String login;
     private String mdp;
-    private int id;
 
+    public User(){
+        
+    }
     /**
      * @return the nom
      */
@@ -79,7 +88,7 @@ public class User {
     /**
      * @return the id
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

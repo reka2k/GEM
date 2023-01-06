@@ -3,28 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package lml.snir.gem.common.metier.entity;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
- * @author Ethan 
+ * @author Ethan
  */
-public class Chauffage {
-    
+@Entity
+public class Chauffage implements Serializable {
+
+    @Id
+    private long id;
     private boolean statut;
     private Compteur compteur;
     private boolean heureCreuse;
     private boolean heurePleine;
-    
-    
-public void eteindre(){
-    
-}
-    
-public void demarrer(){
-    
-}
+
+    public Chauffage() {
+
+    }
+
+    public void eteindre() {
+
+    }
+
+    public void demarrer() {
+
+    }
 
     /**
      * @return the Statut
@@ -80,5 +89,19 @@ public void demarrer(){
      */
     public void setHeurePleine(boolean heurePleine) {
         this.heurePleine = heurePleine;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 }

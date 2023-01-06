@@ -1,20 +1,27 @@
 package lml.snir.gem.common.metier.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author David Macario
  */
-
-public class Suivi {
+@Entity
+public class Suivi implements Serializable {
     
+    @Id
     private long id;
     private User user;
-    private Date date;
+    private Date date;   
     private String action;
     private Vmc vmc;
 
+    public Suivi(){
+        
+    }
     /**
      * @return the id
      */

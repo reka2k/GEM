@@ -10,5 +10,6 @@
 
     <modules>
         <module>gemCommon</module>
+        <module>gemRestfulAPI</module>
     </modules>
 </project>
