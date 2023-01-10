@@ -29,4 +29,10 @@ public class PhysiqueDataFactory {
         if(capteurTemperatureDataService == null) capteurTemperatureDataService = new CapteurTemperatureDataServiceJPAImpl(PU);
         return capteurTemperatureDataService;
     }
+    
+    private static ChauffageDataService chauffageDataService = null;
+    public synchronized static ChauffageDataService getChauffageDataService(){
+        if(chauffageDataService == null) chauffageDataService = new ChauffageDataServiceJPAImpl(PU);
+        return chauffageDataService;
+    }
 }
