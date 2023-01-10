@@ -47,4 +47,5 @@ public class PhysiqueDataFactory {
         if(UserDataService == null) UserDataService = new UserDataServiceJPAImpl(PU);
         return UserDataService;
     }
+
 }
