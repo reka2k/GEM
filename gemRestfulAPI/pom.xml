@@ -40,7 +40,14 @@
             <groupId>lml.snir.persistence</groupId>                                                            
             <artifactId>LMLPersistenceJPA</artifactId>                                                         
             <version>1.0</version>                                                                             
-        </dependency> 
+        </dependency>
+        
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.29</version>
+        </dependency>
+         
     </dependencies>
     
     <build>
