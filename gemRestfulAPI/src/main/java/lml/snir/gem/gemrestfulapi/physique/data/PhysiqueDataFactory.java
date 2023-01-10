@@ -35,4 +35,17 @@ public class PhysiqueDataFactory {
         if(chauffageDataService == null) chauffageDataService = new ChauffageDataServiceJPAImpl(PU);
         return chauffageDataService;
     }
+    
+    private static SuiviDataService SuiviDataService = null;
+    public synchronized static SuiviDataService getSuiviDataService(){
+        if(SuiviDataService == null) SuiviDataService = new SuiviDataServiceJPAImpl(PU);
+        return SuiviDataService;
+    }
+    
+    private static UserDataService UserDataService = null;
+    public synchronized static UserDataService getUserDataService(){
+        if(UserDataService == null) UserDataService = new UserDataServiceJPAImpl(PU);
+        return UserDataService;
+    }
+
 }
