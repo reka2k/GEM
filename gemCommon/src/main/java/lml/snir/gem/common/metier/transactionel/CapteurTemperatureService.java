@@ -6,6 +6,8 @@
 
 package lml.snir.gem.common.metier.transactionel;
 
+import java.util.Date;
+import java.util.List;
 import lml.snir.gem.common.metier.entity.CapteurTemperature;
 import lml.snir.persistence.CrudService;
 
@@ -14,5 +16,5 @@ import lml.snir.persistence.CrudService;
  * @author lml
  */
 public interface CapteurTemperatureService extends CrudService<CapteurTemperature>{
-    //Ajout méthode a voir ensemble
+    public List<CapteurTemperature> getByDate(Date date) throws Exception;
 }

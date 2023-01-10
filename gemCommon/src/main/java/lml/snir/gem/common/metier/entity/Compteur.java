@@ -27,6 +27,22 @@ public class Compteur implements Serializable {
     private float factureSemaine;
     private float factureMois;
 
+    
+    public Compteur(){
+        
+    }
+    
+    public Compteur(CompteurContrat typeContrat,String trame,boolean HC,boolean HP,float factureJour,float factureSemaine,float factureMois){
+        this.typeContrat = typeContrat;
+        this.trame = trame;
+        this.HC = HC;
+        this.HP = HP;
+        this.factureJour = factureJour;
+        this.factureSemaine = factureSemaine;
+        this.factureMois = factureMois;
+        
+    }
+    
     /**
      * @return the typeContrat
      */

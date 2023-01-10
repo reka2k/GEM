@@ -29,6 +29,14 @@ public class User implements Serializable{
     public User(){
         
     }
+    
+     public User(String nom,String prenom,String login,String mdp){
+         this.nom = nom;
+         this.prenom = prenom;
+         this.login = login;
+         this.mdp = mdp;
+        
+    }
     /**
      * @return the nom
      */

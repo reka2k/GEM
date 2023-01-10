@@ -25,3 +25,4 @@ hs_err_pid*
 
 # Fichier généré par MacOS
 *.DS_STORE
+/gemRestfulAPI/target/

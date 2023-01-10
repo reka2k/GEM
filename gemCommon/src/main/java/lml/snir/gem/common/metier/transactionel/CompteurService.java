@@ -6,6 +6,8 @@
 
 package lml.snir.gem.common.metier.transactionel;
 
+import java.util.List;
+import lml.snir.gem.common.metier.entity.CompteurContrat;
 import lml.snir.gem.common.metier.entity.Compteur;
 import lml.snir.persistence.CrudService;
 
@@ -14,5 +16,5 @@ import lml.snir.persistence.CrudService;
  * @author lml
  */
 public interface CompteurService extends CrudService<Compteur> {
-    //Ajout méthode a voir ensemble
+    public List<Compteur> getByType(CompteurContrat contrat) throws Exception;
 }
