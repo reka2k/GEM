@@ -8,15 +8,19 @@ package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Kelyan Ruas
  */
 @Entity
+@XmlRootElement
 public class Compteur implements Serializable {
     @Id
+    @GeneratedValue
     private long id;
     //Correspond au type de contrat
     private CompteurContrat typeContrat;

@@ -16,16 +16,15 @@
     
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>lml.snir.persistence</groupId>
             <artifactId>LMLPersistence</artifactId>
             <version>1.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
         </dependency>
     </dependencies>
 </project>

@@ -10,16 +10,20 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Kelyan Ruas
  */
 @Entity
+@XmlRootElement
 public class User implements Serializable{
 
     @Id
+    @GeneratedValue
     private long id;
     private String nom;
     private String prenom;

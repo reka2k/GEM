@@ -7,19 +7,26 @@ package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ethan
  */
 @Entity
+@XmlRootElement
 public class Vmc implements Serializable {
 
     @Id
+    @GeneratedValue
     private long id;
     private int statut;
+    @OneToOne
     private CapteurTemperature capteurTemperature;
+    @OneToOne
     private CapteurHumidite capteurHumidite;
     private float humidite;
     private float temperature;
