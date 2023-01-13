@@ -5,6 +5,7 @@
  */
 package lml.snir.gem.gemrestfulapi.physique.data;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -50,6 +51,23 @@ public class SuiviDataServiceJPAImpl extends AbstracCrudServiceJPA<Suivi> implem
             suivis = query.getResultList();
         } catch (Exception exception) {
             System.out.println("Erreur Suivi getByVmc: " + exception.getMessage());
+            return null;
+        } finally {
+            this.close();
+        }
+        return suivis;
+    }
+
+    @Override
+    public List<Suivi> getByDate(Date date) throws Exception {
+        List<Suivi> suivis = null;
+        try {
+            this.open();
+            Query query = em.createQuery("SELECT o FROM Suvi o WHERE o.date = :date");
+            query.setParameter("fdate", date);
+            suivis = query.getResultList();
+        } catch (Exception exception) {
+            System.out.println("Erreur Suivi getByDate: " + exception.getMessage());
             return null;
         } finally {
             this.close();
