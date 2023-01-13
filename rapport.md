@@ -31,7 +31,7 @@
 - Réalisation des tests
 - Implémentation MetierTransac
 - Début API REST (Manques les données)
-- *PETIT* avancement sur l'IHM
+- _**PETIT**_ avancement sur l'IHM
 - Création de la BDD finie
 
 # Problèmes rencontrés
