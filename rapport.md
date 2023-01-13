@@ -24,3 +24,27 @@
 
 `fin 10/01/23`
 
+--------------------------------------------------------------
+
+`13/01/23`
+# Réalisé
+- Réalisation des tests
+- Implémentation MetierTransac
+- Début API REST (Manques les données)
+- *PETIT* avancement sur l'IHM
+- Création de la BDD finie
+
+# Problèmes rencontrés
+- Problème avec module wildfly à ajouté
+
+# A Faire
+- Les beans et l'IHM
+- Finir l'API REST
+- Commencer Android
+
+# Autres
+- Potentielement voir où en sont les EC
+- Rien de spéciale cette fois-ci
+
+`fin 13/01/23`
+
