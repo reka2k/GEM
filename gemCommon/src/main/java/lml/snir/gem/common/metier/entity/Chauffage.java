@@ -8,14 +8,12 @@ package lml.snir.gem.common.metier.entity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ethan
  */
 @Entity
-@XmlRootElement
 public class Chauffage implements Serializable {
 
     @Id

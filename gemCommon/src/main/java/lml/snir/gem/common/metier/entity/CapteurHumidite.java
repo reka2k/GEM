@@ -10,14 +10,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author saturne
  */
 @Entity
-@XmlRootElement
 public class CapteurHumidite implements Serializable {
 
     @Id
