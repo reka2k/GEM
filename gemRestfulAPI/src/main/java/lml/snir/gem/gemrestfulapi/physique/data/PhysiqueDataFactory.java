@@ -47,5 +47,16 @@ public class PhysiqueDataFactory {
         if(UserDataService == null) UserDataService = new UserDataServiceJPAImpl(PU);
         return UserDataService;
     }
-
+    
+    private static CompteurDataService CompteurDataService = null;
+    public synchronized static CompteurDataService getCompteurDataService(){
+        if(CompteurDataService == null) CompteurDataService = new CompteurDataServiceJPAImpl(PU);
+        return CompteurDataService;
+    }
+    
+    private static VmcDataService VmcDataService = null;
+    public synchronized static VmcDataService getVmcDataService(){
+        if(VmcDataService == null) VmcDataService = new VmcDataServiceJPAImpl(PU);
+        return VmcDataService;
+    }
 }

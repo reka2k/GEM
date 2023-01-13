@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <artifactId>gemParent</artifactId>
         <groupId>lml.snir.gem</groupId>
         <version>1.0</version>
     </parent>
+    
     <groupId>lml.snir.gem</groupId>
     <artifactId>gemRestfulAPI</artifactId>
     <version>1.0</version>
@@ -21,14 +23,7 @@
         <jakartaee>8.0</jakartaee>
     </properties>
     
-    <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>${jakartaee}</version>
-            <scope>provided</scope>
-        </dependency>
-        
+    <dependencies>        
         <dependency>
             <groupId>lml.snir.gem</groupId>
             <artifactId>common</artifactId>
@@ -36,18 +31,46 @@
             <type>jar</type>
         </dependency>
             
-        <dependency>                                                                                           
-            <groupId>lml.snir.persistence</groupId>                                                            
-            <artifactId>LMLPersistenceJPA</artifactId>                                                         
-            <version>1.0</version>                                                                             
+        <dependency>
+            <groupId>lml.snir.persistence</groupId>
+            <artifactId>LMLPersistence</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
         </dependency>
-        
+        <dependency>
+            <groupId>lml.snir.persistence</groupId>
+            <artifactId>LMLPersistenceJPA</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0.1</version>
+            <type>jar</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpars</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.29</version>
         </dependency>
-         
+        <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>12.0.0</version>
+        </dependency>
     </dependencies>
     
     <build>
