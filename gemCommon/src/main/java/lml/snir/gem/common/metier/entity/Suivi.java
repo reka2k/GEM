@@ -5,12 +5,14 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author David Macario
  */
 @Entity
+@XmlRootElement
 public class Suivi implements Serializable {
     
     @Id
