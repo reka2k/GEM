@@ -1,0 +1,16 @@
+body {
+    background-image:url(landscape.jpg);
+    background-size: cover;
+    background-repeat: space;
+}
+
+#glass {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 5px;
+}
+
+text {
+    color: white;
+    max-height: 0.5em !important;
+}
