@@ -16,9 +16,9 @@ import lml.snir.gem.gemrestfulapi.physique.data.PhysiqueDataFactory;
  *
  * @author lml
  */
-public class CapteurHumiditeServiceImpl implements CapteurHumiditeService{
-    
-    private CapteurHumiditeDataService CapteurHumiditeDataSrv;
+public class CapteurHumiditeServiceImpl implements CapteurHumiditeService {
+
+    private final CapteurHumiditeDataService CapteurHumiditeDataSrv;
 
     public CapteurHumiditeServiceImpl() {
         this.CapteurHumiditeDataSrv = PhysiqueDataFactory.getCapteurHumiditeDataService();
@@ -31,14 +31,11 @@ public class CapteurHumiditeServiceImpl implements CapteurHumiditeService{
 
     @Override
     public CapteurHumidite add(CapteurHumidite t) throws Exception {
-        List<CapteurHumidite> capteurHumidites = this.getByDate(t.getDate());
+        CapteurHumidite capteurHumidite = getById(t.getId());
 
-        for (CapteurHumidite p : capteurHumidites) {
-            if (p.equals(t)) {
-                throw new Exception("CapteurHumidite déjà existante");
-            }
+        if (capteurHumidite != null) {
+            throw new Exception("CapteurHumidite déjà existante");
         }
-
         return this.CapteurHumiditeDataSrv.add(t);
     }
 
@@ -71,5 +68,5 @@ public class CapteurHumiditeServiceImpl implements CapteurHumiditeService{
     public List<CapteurHumidite> getAll(int i, int i1) throws Exception {
         return this.CapteurHumiditeDataSrv.getAll(i, i1);
     }
-    
+
 }

@@ -17,13 +17,12 @@ import lml.snir.gem.gemrestfulapi.physique.data.UserDataService;
  */
 public class UserServiceImpl implements UserService {
 
-    private UserDataService UserDataSrv;
+    private final UserDataService UserDataSrv;
 
     public UserServiceImpl() {
         this.UserDataSrv = PhysiqueDataFactory.getUserDataService();
     }
-    
-    
+
     @Override
     public List<User> getByLogin(String login) throws Exception {
         return this.UserDataSrv.getByLogin(login);
@@ -31,14 +30,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User t) throws Exception {
-        List<User> users = this.getByNomPrenom(t.getNom(), t.getPrenom());
+        User user = UserDataSrv.getById(t.getId());
 
-        for (User p : users) {
-            if (p.equals(t)) {
-                throw new Exception("Perssonne déjà existante");
-            }
+        if (user != null) {
+            throw new Exception("Perssonne déjà existante");
         }
-
         return this.UserDataSrv.add(t);
     }
 
@@ -77,5 +73,5 @@ public class UserServiceImpl implements UserService {
     public List<User> getByNomPrenom(String nom, String prenom) throws Exception {
         return this.UserDataSrv.getByNomPrenom(nom, prenom);
     }
-    
+
 }

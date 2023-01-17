@@ -15,9 +15,9 @@ import lml.snir.gem.gemrestfulapi.physique.data.PhysiqueDataFactory;
  *
  * @author lml
  */
-public class ChauffageServiceImpl implements ChauffageService{
-    
-    private ChauffageDataService ChauffageDataSrv;
+public class ChauffageServiceImpl implements ChauffageService {
+
+    private final ChauffageDataService ChauffageDataSrv;
 
     public ChauffageServiceImpl() {
         this.ChauffageDataSrv = PhysiqueDataFactory.getChauffageDataService();
@@ -25,12 +25,10 @@ public class ChauffageServiceImpl implements ChauffageService{
 
     @Override
     public Chauffage add(Chauffage t) throws Exception {
-        List<Chauffage> chauffages = (List<Chauffage>) this.getById(t.getId());
+        Chauffage chauffage = getById(t.getId());
 
-        for (Chauffage p : chauffages) {
-            if (p.equals(t)) {
-                throw new Exception("Chauffage déjà existante");
-            }
+        if (chauffage != null) {
+            throw new Exception("Chauffage déjà existante");
         }
 
         return this.ChauffageDataSrv.add(t);
@@ -65,5 +63,5 @@ public class ChauffageServiceImpl implements ChauffageService{
     public List<Chauffage> getAll(int i, int i1) throws Exception {
         return this.ChauffageDataSrv.getAll(i, i1);
     }
-    
+
 }

@@ -6,9 +6,12 @@
 package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -20,9 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Chauffage implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private boolean statut;
+    @ManyToOne(cascade = CascadeType.ALL)
     private Compteur compteur;
     private boolean heureCreuse;
     private boolean heurePleine;

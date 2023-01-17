@@ -17,9 +17,9 @@ import lml.snir.gem.gemrestfulapi.physique.data.SuiviDataService;
  *
  * @author lml
  */
-public class SuiviServiceImpl implements SuiviService{
-    
-    private SuiviDataService SuiviDataSrv;
+public class SuiviServiceImpl implements SuiviService {
+
+    private final SuiviDataService SuiviDataSrv;
 
     public SuiviServiceImpl() {
         this.SuiviDataSrv = PhysiqueDataFactory.getSuiviDataService();
@@ -37,14 +37,10 @@ public class SuiviServiceImpl implements SuiviService{
 
     @Override
     public Suivi add(Suivi t) throws Exception {
-        List<Suivi> suivis = this.getByDate(t.getDate());
-
-        for (Suivi p : suivis) {
-            if (p.equals(t)) {
-                throw new Exception("Suivi déjà existante");
-            }
+        Suivi suivi = SuiviDataSrv.getById(t.getId());
+        if (suivi != null) {
+            throw new Exception("Log déjà existante");
         }
-
         return this.SuiviDataSrv.add(t);
     }
 
@@ -77,5 +73,5 @@ public class SuiviServiceImpl implements SuiviService{
     public List<Suivi> getAll(int i, int i1) throws Exception {
         return this.SuiviDataSrv.getAll(i, i1);
     }
-    
+
 }
