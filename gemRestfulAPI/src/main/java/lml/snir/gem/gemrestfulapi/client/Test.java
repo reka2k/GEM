@@ -91,7 +91,7 @@ public class Test {
         CompteurDataSrv.add(c1);
         c1.setFactureJour(0);
         CompteurDataSrv.update(c1);
-        System.out.println(CompteurDataSrv.getByType(CompteurContrat.BASE));
+        System.out.println(CompteurDataSrv.getByType(c1));
         CompteurDataSrv.remove(c1);
 
         c = new Chauffage(true, c1, true, true);
