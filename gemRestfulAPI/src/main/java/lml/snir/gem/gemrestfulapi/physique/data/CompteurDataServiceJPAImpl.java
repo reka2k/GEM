@@ -22,12 +22,12 @@ public class CompteurDataServiceJPAImpl extends AbstracCrudServiceJPA<Compteur> 
     }
 
     @Override
-    public List<Compteur> getByType(Compteur compteur) throws Exception {
+    public List<Compteur> getByType(CompteurContrat contrat) throws Exception {
         List<Compteur> compteurs = null;
         try {
             this.open();
             Query query = em.createQuery("SELECT o FROM Compteur o WHERE o.typecontrat = :fcontrat");
-            query.setParameter("fcontrat", compteur.getTypeContrat());
+            query.setParameter("fcontrat", contrat);
             compteurs = query.getResultList();
         } catch (Exception exception) {
             System.out.println("Erreur Compteur getByType: " + exception.getMessage());

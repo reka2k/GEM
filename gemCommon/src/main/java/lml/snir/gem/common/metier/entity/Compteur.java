@@ -8,6 +8,8 @@ package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +26,7 @@ public class Compteur implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     //Correspond au type de contrat
+    @Enumerated(EnumType.STRING)
     private CompteurContrat typeContrat;
     private String trame;
     private boolean HC; // Utiliser que si le contrat est le bon

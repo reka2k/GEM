@@ -25,8 +25,8 @@ public class CompteurServiceImpl implements CompteurService {
     }
 
     @Override
-    public List<Compteur> getByType(Compteur compteur) throws Exception {
-        return this.CompteurDataSrv.getByType(compteur);
+    public List<Compteur> getByType(CompteurContrat contrat) throws Exception {
+        return this.CompteurDataSrv.getByType(contrat);
     }
 
     @Override
