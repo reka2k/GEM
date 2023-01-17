@@ -48,3 +48,18 @@
 
 `fin 13/01/23`
 
+--------------------------------------------------------------
+`17/01/23`
+# Réalisé
+- Tests
+- Corrections de bugs (Transactionnel)
+- Avancements IHM, Bean
+
+# A faire
+- Continuer beans
+- Continuer IHM
+- Continuer REST
+- Commencer android
+- Easter egg !!!!!!1118!!!!!1
+
+
