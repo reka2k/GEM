@@ -16,9 +16,9 @@ import lml.snir.gem.gemrestfulapi.physique.data.PhysiqueDataFactory;
  *
  * @author lml
  */
-public class CompteurServiceImpl implements CompteurService{
-    
-    private CompteurDataService CompteurDataSrv;
+public class CompteurServiceImpl implements CompteurService {
+
+    private final CompteurDataService CompteurDataSrv;
 
     public CompteurServiceImpl() {
         this.CompteurDataSrv = PhysiqueDataFactory.getCompteurDataService();
@@ -31,12 +31,10 @@ public class CompteurServiceImpl implements CompteurService{
 
     @Override
     public Compteur add(Compteur t) throws Exception {
-        List<Compteur> compteurs = this.getByType(t.getTypeContrat());
+        Compteur compteur = getById(t.getId());
 
-        for (Compteur p : compteurs) {
-            if (p.equals(t)) {
-                throw new Exception("Perssonne déjà existante");
-            }
+        if (compteur != null) {
+            throw new Exception("Compteur déjà existant");
         }
 
         return this.CompteurDataSrv.add(t);
@@ -71,5 +69,5 @@ public class CompteurServiceImpl implements CompteurService{
     public List<Compteur> getAll(int i, int i1) throws Exception {
         return this.CompteurDataSrv.getAll(i, i1);
     }
-    
+
 }

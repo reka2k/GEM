@@ -11,5 +11,5 @@ package lml.snir.gem.common.metier.entity;
  * @author lml
  */
 public enum CompteurContrat {
-    Base, HCHP, Tempo; //Les différents type de contrat (si rajout de contrat c'est ici)
+    BASE, HCHP, TEMPO; //Les différents type de contrat (si rajout de contrat c'est ici)
 }

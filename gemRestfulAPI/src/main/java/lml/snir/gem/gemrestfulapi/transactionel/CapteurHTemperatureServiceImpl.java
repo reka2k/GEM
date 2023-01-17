@@ -18,7 +18,7 @@ import lml.snir.gem.gemrestfulapi.physique.data.CapteurTemperatureDataService;
  */
 public class CapteurHTemperatureServiceImpl implements CapteurTemperatureService{
 
-    private CapteurTemperatureDataService CapteurTemperatureDataSrv;
+    private final CapteurTemperatureDataService CapteurTemperatureDataSrv;
 
     public CapteurHTemperatureServiceImpl() {
         this.CapteurTemperatureDataSrv = PhysiqueDataFactory.getCapteurTemperatureDataService();
@@ -31,13 +31,9 @@ public class CapteurHTemperatureServiceImpl implements CapteurTemperatureService
 
     @Override
     public CapteurTemperature add(CapteurTemperature t) throws Exception {
-        List<CapteurTemperature> capteurTemperatures = this.getByDate(t.getDate());
+        CapteurTemperature capteurTemperature = getById(t.getId());
 
-        for (CapteurTemperature p : capteurTemperatures) {
-            if (p.equals(t)) {
-                throw new Exception("CapteurTemperature déjà existante");
-            }
-        }
+        if(capteurTemperature != null) throw new Exception("CapteurTemperature déjà existante");
 
         return this.CapteurTemperatureDataSrv.add(t);
     }

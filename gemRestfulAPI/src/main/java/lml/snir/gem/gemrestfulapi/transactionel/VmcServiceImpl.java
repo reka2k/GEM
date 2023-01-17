@@ -15,9 +15,9 @@ import lml.snir.gem.gemrestfulapi.physique.data.VmcDataService;
  *
  * @author lml
  */
-public class VmcServiceImpl implements VmcService{
-    
-    private VmcDataService VmcDataSrv;
+public class VmcServiceImpl implements VmcService {
+
+    private final VmcDataService VmcDataSrv;
 
     public VmcServiceImpl() {
         this.VmcDataSrv = PhysiqueDataFactory.getVmcDataService();
@@ -30,12 +30,10 @@ public class VmcServiceImpl implements VmcService{
 
     @Override
     public Vmc add(Vmc t) throws Exception {
-        List<Vmc> vmcs = (List<Vmc>) this.getById(t.getId());
+        Vmc vmc = getById(t.getId());
 
-        for (Vmc p : vmcs) {
-            if (p.equals(vmcs)) {
-                throw new Exception("Vmc déjà existante");
-            }
+        if (vmc != null) {
+            throw new Exception("Vmc déjà existante");
         }
 
         return this.VmcDataSrv.add(t);
@@ -70,5 +68,5 @@ public class VmcServiceImpl implements VmcService{
     public List<Vmc> getAll(int i, int i1) throws Exception {
         return this.VmcDataSrv.getAll(i, i1);
     }
-    
+
 }
