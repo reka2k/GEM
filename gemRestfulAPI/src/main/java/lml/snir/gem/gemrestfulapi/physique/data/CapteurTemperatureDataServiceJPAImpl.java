@@ -21,11 +21,11 @@ public class CapteurTemperatureDataServiceJPAImpl extends AbstracCrudServiceJPA<
          List<CapteurTemperature> capteurs = null;
         try{
             this.open();
-            Query query = em.createQuery("SELECT o FROM CapteursHumidite o WHERE o.date = :date");
+            Query query = em.createQuery("SELECT o FROM CapteurTemperature o WHERE o.date = :date");
             query.setParameter("date", date);
             capteurs = query.getResultList();
         }catch(Exception exception){
-            System.out.println("Erreur CapteursHumidite getByDate: " + exception.getMessage());
+            System.out.println("Erreur CapteurTemperature getByDate: " + exception.getMessage());
             return null;
         }finally{
             this.close();

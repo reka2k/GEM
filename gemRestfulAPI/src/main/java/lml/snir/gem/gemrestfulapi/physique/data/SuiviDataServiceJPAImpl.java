@@ -7,7 +7,6 @@ package lml.snir.gem.gemrestfulapi.physique.data;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import lml.snir.gem.common.metier.entity.Suivi;
 import lml.snir.gem.common.metier.entity.User;
@@ -30,7 +29,7 @@ public class SuiviDataServiceJPAImpl extends AbstracCrudServiceJPA<Suivi> implem
         try {
             this.open();
             Query query = em.createQuery("SELECT o FROM Suvi o WHERE o.user = :user");
-            query.setParameter("fuser", user);
+            query.setParameter("user", user);
             suivis = query.getResultList();
         } catch (Exception exception) {
             System.out.println("Erreur Suivi getByUser: " + exception.getMessage());
@@ -47,7 +46,7 @@ public class SuiviDataServiceJPAImpl extends AbstracCrudServiceJPA<Suivi> implem
         try {
             this.open();
             Query query = em.createQuery("SELECT o FROM Suvi o WHERE o.vmc = :vmc");
-            query.setParameter("fvmc", vmc);
+            query.setParameter("vmc", vmc);
             suivis = query.getResultList();
         } catch (Exception exception) {
             System.out.println("Erreur Suivi getByVmc: " + exception.getMessage());
@@ -63,8 +62,8 @@ public class SuiviDataServiceJPAImpl extends AbstracCrudServiceJPA<Suivi> implem
         List<Suivi> suivis = null;
         try {
             this.open();
-            Query query = em.createQuery("SELECT o FROM Suvi o WHERE o.date = :date");
-            query.setParameter("fdate", date);
+            Query query = em.createQuery("SELECT o FROM Suivi o WHERE o.date = :date");
+            query.setParameter("date", date);
             suivis = query.getResultList();
         } catch (Exception exception) {
             System.out.println("Erreur Suivi getByDate: " + exception.getMessage());

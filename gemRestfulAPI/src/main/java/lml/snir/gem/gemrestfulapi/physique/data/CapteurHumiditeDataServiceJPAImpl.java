@@ -18,14 +18,14 @@ public class CapteurHumiditeDataServiceJPAImpl extends AbstracCrudServiceJPA<Cap
 
     @Override
     public List<CapteurHumidite> getByDate(Date date) throws Exception {
-        List<CapteurHumidite> capteurs = null;
+        List<CapteurHumidite> capteurs;
         try{
             this.open();
-            Query query = em.createQuery("SELECT o FROM CapteursHumidite o WHERE o.date = :date");
+            Query query = em.createQuery("SELECT o FROM CapteurHumidite o WHERE o.date = :date");
             query.setParameter("date", date);
             capteurs = query.getResultList();
         }catch(Exception exception){
-            System.out.println("Erreur CapteursHumidite getByDate: " + exception.getMessage());
+            System.out.println("Erreur Capteur Humidite getByDate: " + exception.getMessage());
             return null;
         }finally{
             this.close();

@@ -15,5 +15,5 @@ import lml.snir.persistence.CrudService;
  * @author lml
  */
 public interface CompteurDataService extends CrudService<Compteur> {
-    public List<Compteur> getByType(CompteurContrat contrat) throws Exception;
+    public List<Compteur> getByType(Compteur compteur) throws Exception;
 }
