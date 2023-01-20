@@ -28,7 +28,7 @@ import lml.snir.gem.common.metier.entity.Compteur;
 @Path("/compteur")
 public class CompteurFacadeREST extends AbstractFacade<Compteur> {
 
-    @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
+    //@PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
 
     public CompteurFacadeREST() {

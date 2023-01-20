@@ -23,7 +23,7 @@ import lml.snir.gem.common.metier.entity.Vmc;
 @Path("/vmc")
 public class VmcFacadeREST extends AbstractFacade<Vmc> {
 
-    @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
+    //@PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
 
     public VmcFacadeREST() {

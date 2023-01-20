@@ -16,11 +16,11 @@ import lml.snir.gem.gemrestfulapi.physique.data.CapteurTemperatureDataService;
  *
  * @author lml
  */
-public class CapteurHTemperatureServiceImpl implements CapteurTemperatureService{
+public class CapteurTemperatureServiceImpl implements CapteurTemperatureService{
 
     private final CapteurTemperatureDataService CapteurTemperatureDataSrv;
 
-    public CapteurHTemperatureServiceImpl() {
+    public CapteurTemperatureServiceImpl() {
         this.CapteurTemperatureDataSrv = PhysiqueDataFactory.getCapteurTemperatureDataService();
     }
     

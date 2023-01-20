@@ -36,10 +36,10 @@ public class Test {
      */
     public static void main(String[] args) throws Exception {
 
-        CapteurHumidite ch = new CapteurHumidite();
+        CapteurHumidite ch;
         CapteurHumiditeService CapteurHumiditeDataSrv = MetierTransactionelFactory.getCapteurHumiditeService();
 
-        CapteurTemperature ct = new CapteurTemperature();
+        CapteurTemperature ct;
         CapteurTemperatureService CapteurTemperatureDataSrv = MetierTransactionelFactory.getCapteurTemperatureService();
 
         Chauffage c;
@@ -61,16 +61,11 @@ public class Test {
 
         u = new User("nom", "prenom", "login", "mdp");
         UserDataSrv.add(u);
-        u.setPrenom("david");
-        u.setId(u.getId());
-        UserDataSrv.update(u);
         System.out.println(UserDataSrv.getByNomPrenom("nom", "david"));
 
         char[] mesure = new char[5];
         ch = new CapteurHumidite(mesure, date, (float) 12.37892);
         CapteurHumiditeDataSrv.add(ch);
-        ch.setHumidite((float) 421.48912781);
-        CapteurHumiditeDataSrv.update(ch);
         System.out.println(CapteurHumiditeDataSrv.getByDate(date));
 
         ct = new CapteurTemperature(mesure, date, (float) 312.21241);
@@ -89,25 +84,21 @@ public class Test {
 
         c1 = new Compteur(CompteurContrat.TEMPO, trame, true, true, 0, 0, 0);
         CompteurDataSrv.add(c1);
-        c1.setFactureJour(0);
-        CompteurDataSrv.update(c1);
         System.out.println(CompteurDataSrv.getByType(CompteurContrat.TEMPO));
         CompteurDataSrv.remove(c1);
 
         c = new Chauffage(true, c1, true, true);
         ChauffageDataSrv.add(c);
-        c.setCompteur(c1);
-        ChauffageDataSrv.update(c);
         System.out.println(ChauffageDataSrv.getAll());
         
         // Fin test -> on supprimte tout
-        SuiviDataSrv.remove(s);
-        VmcDataSrv.remove(v);
-        UserDataSrv.remove(u);
-        CapteurHumiditeDataSrv.remove(ch);
-        CapteurTemperatureDataSrv.remove(ct);
-        ChauffageDataSrv.remove(c);
-        CompteurDataSrv.remove(c1);
+        //SuiviDataSrv.remove(s);
+        //VmcDataSrv.remove(v);
+        //UserDataSrv.remove(u);
+        //CapteurHumiditeDataSrv.remove(ch);
+        //CapteurTemperatureDataSrv.remove(ct);
+        //ChauffageDataSrv.remove(c);
+        //CompteurDataSrv.remove(c1);
 
     }
 

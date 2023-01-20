@@ -28,7 +28,7 @@ import lml.snir.gem.common.metier.entity.Suivi;
 @Path("/suivi")
 public class SuiviFacadeREST extends AbstractFacade<Suivi> {
 
-    @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
+    //@PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
 
     public SuiviFacadeREST() {
@@ -36,10 +36,17 @@ public class SuiviFacadeREST extends AbstractFacade<Suivi> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Suivi entity) {
         super.create(entity);
+    }
+    
+    @POST
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("/add")
+    public String createSuivi(Suivi entity) {
+        return null;
+        
     }
 
     @PUT

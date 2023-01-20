@@ -5,10 +5,10 @@
  */
 package lml.snir.gem.gemrestfulapi.api;
 
+import com.google.gson.Gson;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +19,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import lml.snir.gem.common.metier.entity.User;
+import lml.snir.gem.common.metier.transactionel.UserService;
+import lml.snir.gem.gemrestfulapi.transactionel.MetierTransactionelFactory;
 
 /**
  *
@@ -28,11 +30,13 @@ import lml.snir.gem.common.metier.entity.User;
 @Path("/user")
 public class UserFacadeREST extends AbstractFacade<User> {
 
-    @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
+    private final UserService userService;
 
     public UserFacadeREST() {
         super(User.class);
+        this.userService = MetierTransactionelFactory.getUserService();
+        
     }
 
     @POST
@@ -63,11 +67,15 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_JSON})
     @Path("getAll")
-    public List<User> findAll() {
-        return super.findAll();
+    public String findAllUsers() {
+        try {
+            return new Gson().toJson(this.userService.getAll());
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
+        return null;
     }
 
     @GET
