@@ -28,7 +28,7 @@ import lml.snir.gem.common.metier.entity.Chauffage;
 @Path("/chauffage")
 public class ChauffageFacadeREST extends AbstractFacade<Chauffage> {
 
-    @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
+    //@PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
 
     public ChauffageFacadeREST() {

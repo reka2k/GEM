@@ -39,7 +39,7 @@ public class User implements Serializable{
          this.nom = nom;
          this.prenom = prenom;
          this.login = login;
-         this.mdp = mdp;
+         this.mdp = hashPassword(mdp);
         
     }
     /**

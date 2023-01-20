@@ -40,7 +40,7 @@ public class MetierTransactionelFactory {
     private static CapteurTemperatureService CapteurTemperatureSrv = null;
     public synchronized static CapteurTemperatureService getCapteurTemperatureService(){
         if(CapteurTemperatureSrv == null){
-            CapteurTemperatureSrv = new CapteurHTemperatureServiceImpl();
+            CapteurTemperatureSrv = new CapteurTemperatureServiceImpl();
         }
         return CapteurTemperatureSrv;
     }
