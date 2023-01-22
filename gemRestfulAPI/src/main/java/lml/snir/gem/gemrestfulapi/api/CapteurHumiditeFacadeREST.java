@@ -64,7 +64,6 @@ public class CapteurHumiditeFacadeREST extends AbstractFacade<CapteurHumidite> {
         JsonBuilderFactory factory = Json.createBuilderFactory(config);
         try {
             this.capteurHumiditeService.add(capteur);
-            this.capteurHumiditeService.remove(capteur);
             JsonObject jsonString = factory.createObjectBuilder().add("message", "Data inserted successfully").build();
             return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json").build();
 
