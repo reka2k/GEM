@@ -1,15 +1,70 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view contentType="text/html"/>
+    <h:head>
         <title>GEM</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div></div>
-    </body>
+    </h:head>
+    <h:body>
+        <h:form >
+            <p:growl id="msg"/>
+
+            <div style="display: flex;">
+
+                <div>
+                    <h:graphicImage id="waveImg" url="#{resource['logo2.png']}" style='overflow: hidden'/>
+                </div>
+
+                <div style="align-content: flex-end; width: 15%; margin-left: 30em; margin-top: 1em">
+                    <h1><font face="Times"><center>GEM</center></font></h1>
+                </div>
+
+                <div style="align-content: flex-end; width: 15%; margin-left: 29em; margin-top: 8em">
+                    <h:outputLabel for="date" value="Sélectionnez une date" style="font-size: x-large" />
+                </div>
+
+                <div style="align-content: flex-end; width: 15%; margin-right: 3em; margin-top: 8em">
+                    <p:datePicker id="date" value="#{suiviBean.date}" onchange="#{ChartView.createBarModel()}">
+                    </p:datePicker>
+                </div>
+            </div>
+
+            <br/><br/>
+            <div style="display: flex;">
+
+                <div class="card">
+                    <p:barChart model="#{ChartView.barModel}" style="width: 100%; height: 70vh"/>
+                </div>
+
+                <div style="align-content: flex-end; width: 15%; margin-left: 15em; margin-top: 4em">
+                    <p:selectOneMenu value="#{capteurHumiditeBean.mesure}">
+                        <f:selectItem itemLabel="-- Séléctionnez --" itemValue="0"/>
+                        <f:selectItem itemLabel="Conso" itemValue="0"/>
+                        <f:selectItem itemLabel="Charge" itemValue="0"/>               
+                    </p:selectOneMenu>
+
+                    <div style="align-content: flex-end; width: 15%; margin-left: 4em; margin-top: 6em">
+                        <h:outputLabel value="VMC" style="font-size: x-large;" />
+                    </div>
+
+                    <div style="align-content: flex-end; width: 15%; margin-left: 4em; margin-top: 2em">
+                        <p:button value="OFF" styleClass="rounded-button" />&nbsp;&nbsp;
+                        <p:button value="OFF" styleClass="rounded-button" />&nbsp;&nbsp;
+                        <p:button value="OFF" styleClass="rounded-button" />&nbsp;&nbsp;
+                    </div>
+
+                    <div style="align-content: flex-end; width: 15%; margin-left: 4em; margin-top: 13em">
+                        <p:button value="Facture" styleClass="rounded-button" />&nbsp;&nbsp;
+                    </div>
+                    
+                </div>
+
+
+
+            </div>
+        </h:form>
+    </h:body>
 </html>
