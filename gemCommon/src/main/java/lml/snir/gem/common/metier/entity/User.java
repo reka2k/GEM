@@ -9,6 +9,7 @@ package lml.snir.gem.common.metier.entity;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class User implements Serializable{
     private long id;
     private String nom;
     private String prenom;
+    @Column(unique = true)
     private String login;
     private String mdp;
 
