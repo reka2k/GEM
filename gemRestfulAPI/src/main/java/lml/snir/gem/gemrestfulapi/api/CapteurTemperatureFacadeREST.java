@@ -64,7 +64,6 @@ public class CapteurTemperatureFacadeREST extends AbstractFacade<CapteurTemperat
         JsonBuilderFactory factory = Json.createBuilderFactory(config);
         try {
             this.capteurTemperatureService.add(capteur);
-            this.capteurTemperatureService.remove(capteur);
             JsonObject jsonString = factory.createObjectBuilder().add("message", "Data inserted successfully").build();
             return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json").build();
 

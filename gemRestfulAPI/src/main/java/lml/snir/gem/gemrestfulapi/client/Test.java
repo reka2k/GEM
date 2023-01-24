@@ -78,7 +78,7 @@ public class Test {
         VmcDataSrv.update(v);
         System.out.println(VmcDataSrv.getById(0));
 
-        s = new Suivi(u, date, "action", v);
+        s = new Suivi(UserDataSrv.getById(u.getId()), date, "action", v);
         SuiviDataSrv.add(s);
         System.out.println(SuiviDataSrv.getByDate(date));
 
