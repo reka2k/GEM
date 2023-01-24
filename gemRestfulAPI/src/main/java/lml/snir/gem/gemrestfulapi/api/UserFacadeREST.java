@@ -6,8 +6,14 @@
 package lml.snir.gem.gemrestfulapi.api;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -18,6 +24,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.gem.common.metier.transactionel.UserService;
 import lml.snir.gem.gemrestfulapi.transactionel.MetierTransactionelFactory;
@@ -36,7 +43,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     public UserFacadeREST() {
         super(User.class);
         this.userService = MetierTransactionelFactory.getUserService();
-        
+
     }
 
     @POST
@@ -46,55 +53,125 @@ public class UserFacadeREST extends AbstractFacade<User> {
         super.create(entity);
     }
 
-    @PUT
-    @Path("{id}")
+    @POST
     @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, User entity) {
-        super.edit(entity);
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("insert")
+    public Response insert(User user) {
+        
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        final Map<String, ?> config = Collections.emptyMap();
+        JsonBuilderFactory factory = Json.createBuilderFactory(config);
+        try {
+            List<User> u = this.userService.getByLogin(user.getLogin());
+            if(!u.isEmpty()) throw new Exception("User already exists");
+            this.userService.add(user);
+            JsonObject jsonString = factory.createObjectBuilder().add("message", "Data inserted successfully").build();
+            return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json").build();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return Response.status(406, "User already exists").type(MediaType.APPLICATION_JSON).build();
+        }
+    }
+
+    @PUT
+    @Path("edit/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response edit(@PathParam("id") Long id, User user) {
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        final Map<String, ?> config = Collections.emptyMap();
+        JsonBuilderFactory factory = Json.createBuilderFactory(config);
+        try {
+            this.userService.update(user);
+            JsonObject jsonString = factory.createObjectBuilder().add("message", "Data edited successfully").build();
+            return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json").build();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).build();
+        }
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+    @Path("remove/{id}")
+    public Response remove(@PathParam("id") Long id) {
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        final Map<String, ?> config = Collections.emptyMap();
+        JsonBuilderFactory factory = Json.createBuilderFactory(config);
+        try {
+            User user = userService.getById(id);
+            this.userService.remove(user);
+            JsonObject jsonString = factory.createObjectBuilder().add("message", "Data removed successfully").build();
+            return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json").build();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).build();
+        }
     }
 
     @GET
-    @Path("{id}")
+    @Path("getById/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public User find(@PathParam("id") Long id) {
-        return super.find(id);
+    public Response getById(@PathParam("id") Long id) {
+        try {
+            return Response.ok(new Gson().toJson(this.userService.getById(id))).build();
+        } catch (Exception e) {
+            System.out.println(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).build();
+        }
     }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("getAll")
-    public String findAllUsers() {
+    public Response findAllUsers() {
         try {
-            return new Gson().toJson(this.userService.getAll());
+            return Response.ok(new Gson().toJson(this.userService.getAll())).build();
         } catch (Exception ex) {
             System.err.println(ex);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).build();
         }
-        return null;
     }
 
     @GET
-    @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("getByLogin/{login}")
+    public Response getByLogin(@PathParam("login") String login) {
+        try {
+            return Response.ok(new Gson().toJson(this.userService.getByLogin(login))).build();
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("getByNomPrenom/{nom}-{prenom}")
+    //     getByNomPrenom/nom-prenom
+    public Response getByNomPrenom(@PathParam("nom") String nom, @PathParam("prenom") String prenom) {
+        try{
+            return Response.ok(new Gson().toJson(this.userService.getByNomPrenom(nom, prenom))).build();
+        }catch(Exception ex){
+            System.out.println(ex);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
