@@ -1,7 +1,17 @@
-# GEM
-Gestion d'énergie d'une maison
-https://we.tl/t-GKemkip4tE
-<img width="777" alt="Capture d’écran 2023-01-03 à 14 41 46" src="https://user-images.githubusercontent.com/86846166/210369200-88010806-dcac-426c-889d-44a627e5d5c7.png">
+# Annonce Important
+Bonjour, je vend la liste du prof (12Mo) des fichier à importer au sein même de votre BDD
 
-# Schéma IHM
-![Design debut](https://user-images.githubusercontent.com/121857444/214248547-9513fb79-902b-4432-8879-04b8fcb65fa0.png)
+Il faut savoir que la taille Max de PhpMyAdmin est de 2Mo
+
+J'ai du donc découper le fichier txt en plusieur partie de 2Mo
+
+PS : Sa ma prit 40min de copier coller on va pas se mito sa ma clc c'est donc pour sa que je met cette annonce
+
+à débattre 4 café
+
+Me contacter par GitHUB unniquement 
+
+Je ne répond pas au appelle
+
+Les acheteur du dimance passer votre chemin
+
