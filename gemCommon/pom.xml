@@ -27,7 +27,6 @@
             <version>2.5.2</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 
     </dependencies>
 </project>
