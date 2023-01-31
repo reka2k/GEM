@@ -32,6 +32,7 @@ import com.google.gson.GsonBuilder;
 import lml.snir.gem.common.metier.entity.Suivi;
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.gem.common.metier.transactionel.SuiviService;
+import lml.snir.gem.gemrestfulapi.transactionel.MetierTransactionelFactory;
 import lml.snir.gem.gemrestfulapi.transactionel.SuiviServiceImpl;
 
 /**
@@ -42,7 +43,6 @@ import lml.snir.gem.gemrestfulapi.transactionel.SuiviServiceImpl;
 @Path("/suivi")
 public class SuiviFacadeREST extends AbstractFacade<Suivi> {
 
-    // @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
     private final SuiviService suiviService;
 
@@ -140,9 +140,10 @@ public class SuiviFacadeREST extends AbstractFacade<Suivi> {
     }
 
     @GET
-    @Path("getByUser/{user}")
+    @Path("getByUser/{login}")
     @Produces({ MediaType.APPLICATION_JSON })
-    public Response getByUser(@PathParam("user") User user) {
+    public Response getByUser(@PathParam("login") String login) throws Exception{
+        User user = MetierTransactionelFactory.getUserService().getUserByLogin(login);
         try {
             return Response.ok(new Gson().toJson(this.suiviService.getByUser(user)), MediaType.APPLICATION_JSON)
                     .type("application/json").build();
@@ -173,7 +174,7 @@ public class SuiviFacadeREST extends AbstractFacade<Suivi> {
     @Override
     @Produces({ MediaType.APPLICATION_JSON })
     public List<Suivi> findAll() {
-        return null;
+        return super.findAll();
     }
 
     @Override

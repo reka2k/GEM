@@ -48,17 +48,17 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({ MediaType.APPLICATION_JSON })
     public void create(User entity) {
         super.create(entity);
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
     @Path("insert")
     public Response insert(User user) {
-        
+
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -67,7 +67,8 @@ public class UserFacadeREST extends AbstractFacade<User> {
         JsonBuilderFactory factory = Json.createBuilderFactory(config);
         try {
             List<User> u = this.userService.getByLogin(user.getLogin());
-            if(!u.isEmpty()) throw new Exception("User already exists");
+            if (!u.isEmpty())
+                throw new Exception("User already exists");
             this.userService.add(user);
             JsonObject jsonString = factory.createObjectBuilder().add("message", "Data inserted successfully").build();
             return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json").build();
@@ -80,7 +81,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @PUT
     @Path("edit/{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({ MediaType.APPLICATION_JSON })
     public Response edit(@PathParam("id") Long id, User user) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -122,7 +123,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @GET
     @Path("getById/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON })
     public Response getById(@PathParam("id") Long id) {
         try {
             return Response.ok(new Gson().toJson(this.userService.getById(id))).build();
@@ -133,7 +134,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON })
     @Path("getAll")
     public Response findAllUsers() {
         try {
@@ -145,7 +146,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON })
     @Path("getByLogin/{login}")
     public Response getByLogin(@PathParam("login") String login) {
         try {
@@ -157,13 +158,49 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Path("/auth/{login}-{password}")
+    public Response auth(@PathParam("login") String login, @PathParam("password") String password) {
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        final Map<String, ?> config = Collections.emptyMap();
+        JsonBuilderFactory factory = Json.createBuilderFactory(config);
+
+        try {
+            User user = userService.getUserByLogin(login);
+            User hashedPassword = new User();
+            hashedPassword.setMdp(password);
+
+            if (hashedPassword.getMdp() == null ? user.getMdp() == null : hashedPassword.getMdp().equals(user.getMdp())) {
+                JsonObject jsonString = factory.createObjectBuilder()
+                        .add("auth", true)
+                        .add("message", "Authentification succesful")
+                        .build();
+                return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json")
+                        .build();
+            } else {
+                JsonObject jsonString = factory.createObjectBuilder()
+                        .add("auth", false)
+                        .add("message", "Authentification failed")
+                        .build();
+                return Response.ok(gson.toJson(jsonString), MediaType.APPLICATION_JSON).type("application/json")
+                        .build();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GET
+    @Produces({ MediaType.APPLICATION_JSON })
     @Path("getByNomPrenom/{nom}-{prenom}")
-    //     getByNomPrenom/nom-prenom
+    // getByNomPrenom/nom-prenom
     public Response getByNomPrenom(@PathParam("nom") String nom, @PathParam("prenom") String prenom) {
-        try{
+        try {
             return Response.ok(new Gson().toJson(this.userService.getByNomPrenom(nom, prenom))).build();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
