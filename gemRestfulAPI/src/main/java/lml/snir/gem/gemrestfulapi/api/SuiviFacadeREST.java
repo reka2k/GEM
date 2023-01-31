@@ -32,6 +32,7 @@ import com.google.gson.GsonBuilder;
 import lml.snir.gem.common.metier.entity.Suivi;
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.gem.common.metier.transactionel.SuiviService;
+import lml.snir.gem.gemrestfulapi.transactionel.MetierTransactionelFactory;
 import lml.snir.gem.gemrestfulapi.transactionel.SuiviServiceImpl;
 
 /**
@@ -139,9 +140,10 @@ public class SuiviFacadeREST extends AbstractFacade<Suivi> {
     }
 
     @GET
-    @Path("getByUser/{user}")
+    @Path("getByUser/{login}")
     @Produces({ MediaType.APPLICATION_JSON })
-    public Response getByUser(@PathParam("user") User user) {
+    public Response getByUser(@PathParam("login") String login) throws Exception{
+        User user = MetierTransactionelFactory.getUserService().getUserByLogin(login);
         try {
             return Response.ok(new Gson().toJson(this.suiviService.getByUser(user)), MediaType.APPLICATION_JSON)
                     .type("application/json").build();

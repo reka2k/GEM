@@ -172,7 +172,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
             User hashedPassword = new User();
             hashedPassword.setMdp(password);
 
-            if (hashedPassword.getMdp() == user.getMdp()) {
+            if (hashedPassword.getMdp() == null ? user.getMdp() == null : hashedPassword.getMdp().equals(user.getMdp())) {
                 JsonObject jsonString = factory.createObjectBuilder()
                         .add("auth", true)
                         .add("message", "Authentification succesful")
