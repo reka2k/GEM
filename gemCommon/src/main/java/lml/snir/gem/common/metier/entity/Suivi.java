@@ -1,0 +1,114 @@
+package lml.snir.gem.common.metier.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ *
+ * @author David Macario
+ */
+@Entity
+@XmlRootElement
+public class Suivi implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date date;   
+    private String action;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Vmc vmc;
+
+    public Suivi(){
+        
+    }
+    
+     public Suivi(User user,Date date,String action,Vmc vmc){
+         this.user = user;
+         this.date = date;
+         this.action = action;
+         this.vmc = vmc;
+        
+    }
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * @return the action
+     */
+    public String getAction() {
+        return action;
+    }
+
+    /**
+     * @param action the action to set
+     */
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    /**
+     * @return the vmc
+     */
+    public Vmc getVmc() {
+        return vmc;
+    }
+
+    /**
+     * @param vmc the vmc to set
+     */
+    public void setVmc(Vmc vmc) {
+        this.vmc = vmc;
+    }
+    
+}
