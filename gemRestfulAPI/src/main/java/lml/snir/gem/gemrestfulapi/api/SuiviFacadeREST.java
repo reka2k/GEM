@@ -42,7 +42,6 @@ import lml.snir.gem.gemrestfulapi.transactionel.SuiviServiceImpl;
 @Path("/suivi")
 public class SuiviFacadeREST extends AbstractFacade<Suivi> {
 
-    // @PersistenceContext(unitName = "lml.snir.GEM_GEM_war_1.0PU")
     private EntityManager em;
     private final SuiviService suiviService;
 
@@ -173,7 +172,7 @@ public class SuiviFacadeREST extends AbstractFacade<Suivi> {
     @Override
     @Produces({ MediaType.APPLICATION_JSON })
     public List<Suivi> findAll() {
-        return null;
+        return super.findAll();
     }
 
     @Override

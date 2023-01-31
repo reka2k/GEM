@@ -74,4 +74,9 @@ public class UserServiceImpl implements UserService {
         return this.UserDataSrv.getByNomPrenom(nom, prenom);
     }
 
+    @Override
+    public User getUserByLogin(String login) throws Exception{
+        return this.UserDataSrv.getUserByLogin(login);
+    }
+
 }

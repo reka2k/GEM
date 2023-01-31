@@ -17,4 +17,5 @@ import lml.snir.persistence.CrudService;
 public interface UserDataService extends CrudService<User> {
     public List<User> getByNomPrenom(String nom, String prenom) throws Exception;
     public List<User> getByLogin(String login) throws Exception;
+    public User getUserByLogin(String login) throws Exception;
 }

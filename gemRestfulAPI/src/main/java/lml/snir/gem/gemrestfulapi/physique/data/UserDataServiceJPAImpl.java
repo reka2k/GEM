@@ -56,6 +56,22 @@ public class UserDataServiceJPAImpl extends AbstracCrudServiceJPA<User> implemen
         }
         return users;
     }
-   
-    
+
+    @Override
+    public User getUserByLogin(String login) throws Exception {
+        User user = null;
+        try {
+            this.open();
+            Query query = em.createQuery("SELECT o FROM User o WHERE o.login = :login");
+            query.setParameter("login", login);
+            user = (User) query.getSingleResult();
+        } catch (Exception exception) {
+            System.out.println("Erreur User getUserByLogin: " + exception.getLocalizedMessage());
+            return null;
+        } finally {
+            this.close();
+        }
+        return user;
+    }
+
 }
