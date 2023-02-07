@@ -5,3 +5,6 @@ https://we.tl/t-GKemkip4tE
 
 # Schéma IHM
 ![Design debut](https://user-images.githubusercontent.com/121857444/214248547-9513fb79-902b-4432-8879-04b8fcb65fa0.png)
+
+# IHM V2
+![Capture d’écran du 2023-02-07 09-59-14](https://user-images.githubusercontent.com/115349534/217199072-c4c400c1-e3b3-484f-8ec7-53c9bc03fbdf.png)
