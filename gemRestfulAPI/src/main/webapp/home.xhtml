@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Home - GEM ━╤デ╦︻(▀̿̿Ĺ̯̿̿▀̿ ̿)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="home.css"/>
+    </h:head>
+    <div id="background"></div>
+    <header>
+        <div>
+            <h:graphicImage url="#{'logo2.png'}"/>
+        </div>
+    </header>
+    <h:body>
+        <p:growl id="msg"/>
+        <div class="content">
+            <div>
+                <div class="selection-form">
+                    <div>
+                        <h:outputLabel value="Pick date"/>
+                        <br></br>
+                        <p:datePicker id="date" style="margin-top: 3px" value="#{suiviBean.date}" onchange="#{ChartView.createBarModel()}"></p:datePicker>
+                    </div>
+                    <div>
+                        <h:outputLabel value="Choose graph"/>
+                        <br></br>
+                        <p:selectOneButton style="margin-top: 3px" value="#{capteurHumiditeBean.mesure}">
+                            <f:selectItem itemLabel="Conso" itemValue="0"/>
+                            <f:selectItem itemLabel="Charge" itemValue="0"/>
+                        </p:selectOneButton>
+                    </div>
+                </div>
+                <p:barChart model="#{ChartView.barModel}"/>
+            </div>
+            <div>
+
+                <div>
+                    <h:outputLabel value="VMC"/>
+                    <br></br>
+                    <p:selectOneButton style="margin-top: 3px" value="#{vmcBean.statut}">
+                        <f:selectItem itemLabel="OFF" itemValue="1"/>
+                        <f:selectItem itemLabel="SLOW" itemValue="2"/>
+                        <f:selectItem itemLabel="FAST" itemValue="3"/>
+                    </p:selectOneButton>
+                </div>
+                <br></br>
+                <div>
+                    <p:button value="Facture" styleClass="severities-button ui-button-success" />&nbsp;&nbsp;
+                </div> 
+            </div>
+        </div>
+    </h:body>
+
+    <!-- 
+              ____          
+            ／＞　 フ          
+           | 　_　_|          
+          ／` ミ＿xノ           
+         /　　　　 |           
+        /　 ヽ　　 ﾉ           
+       │　　 |　|　|           
+    ／￣|　　 |　|　|            
+   |  (￣ヽ＿_ヽ_)__)          
+   ＼二)
+            
+            ^^ ELGATO ^^
+    -->
+</html>
