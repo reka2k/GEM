@@ -8,3 +8,7 @@ https://we.tl/t-GKemkip4tE
 
 # Diagramme de classe
 ![Diagramme de classe](https://user-images.githubusercontent.com/121857444/222674896-b233bed8-5d6b-4685-a142-af64f779cc5d.png)
+
+# vue du projet
+
+![vue_projet](https://user-images.githubusercontent.com/121857444/222731435-90c0952a-e0df-4af7-94f4-fff922a9ad79.png)
