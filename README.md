@@ -5,3 +5,6 @@ https://we.tl/t-GKemkip4tE
 
 # Schéma IHM
 ![Design debut](https://user-images.githubusercontent.com/121857444/214248547-9513fb79-902b-4432-8879-04b8fcb65fa0.png)
+
+# Diagramme de classe
+![Diagramme de classe](https://user-images.githubusercontent.com/121857444/222674896-b233bed8-5d6b-4685-a142-af64f779cc5d.png)
