@@ -5,11 +5,15 @@
       xmlns:p="http://primefaces.org/ui">
     <f:view contentType="text/html"/>
     <h:head>
-        <title>Gestion Electrique</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.1/chartjs-adapter-moment.min.js" integrity="sha512-hVy4KxCKgnXi2ok7rlnlPma4JHXI1VPQeempoaclV1GwRHrDeaiuS1pI6DVldaj5oh6Opy2XJ2CTljQLPkaMrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+        <title>GEM - Home</title>
+        <link rel="icon" href="logo1.png"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="home.css"/>
     </h:head>
+    <div id="background"></div>
     <h:outputScript>
       function chartExtender() {
       //Copie la config des options dans une var
@@ -70,27 +74,47 @@
 
 
     </h:outputScript>
-    <h:body>
-        <h:form >
-            <p:growl id="msg"/>
-            <div style="display: flex; justify-content: center; max-height: 10vh;">
-                <h:graphicImage id="waveImg" url="#{resource['4.png']}" style='overflow: visible; height: 150px'/>
-
-                <h:outputLabel for="date" value="Date: " style="font-size: x-large; margin: auto;" /> &nbsp;
-
-                <p:datePicker id="date" value="#{ChartView.date}" onchange="#{ChartView.afficherGraph()}" style="margin: auto;">
-                    <p:ajax event="dateSelect" update="graph" listener="#{ChartView.afficherGraph()}"/>
-                </p:datePicker> &nbsp;&nbsp;
+    <header>
+        <div style="display: flex;">
+            <div>
+                <h:graphicImage url="#{'logotext1.png'}"/>
             </div>
-
-            <br/><br/>
-            <div style="display: flex;">
-                <div>
-                    <p:lineChart id="graph" model="#{ChartView.linemodel}" rendered="true" style="width: 100%; height: 70vh;"/>
+            <div style="display: flex; align-items: center;"> 
+                <div style="display: flex">                  
+                 <h:outputLabel value="VMC " style="margin-top: 9px;margin-left: 10vw;"/>
+                    <p:selectOneButton style="margin-top: -1px;margin-left: 2vw" value="#{vmcBean.statut}">
+                        <f:selectItem itemLabel="OFF" itemValue="1"/>
+                        <f:selectItem itemLabel="SLOW" itemValue="2"/>
+                        <f:selectItem itemLabel="FAST" itemValue="3"/>
+                    </p:selectOneButton>
                 </div>
-
+                <br></br>
+                <div>
+                    <p:button value="Facture" styleClass="severities-button ui-button-success" style="margin-left: 10vw;"/>&nbsp;&nbsp;
+                </div> 
             </div>
-
-        </h:form>
+        </div>
+    </header>
+    <h:body>
+        <div class="content">
+            <div>
+                <div class="selection-form">
+                    <div>
+                        <h:outputLabel value="Pick date"/>
+                        <br></br>
+                        <p:datePicker id="date" style="margin-top: 3px" value="#{suiviBean.date}" onchange="#{ChartView.createBarModel()}"></p:datePicker>
+                    </div>
+                    <div>
+                        <h:outputLabel value="Choose graph"/>
+                        <br></br>
+                        <p:selectOneButton style="margin-top: 3px" value="#{capteurHumiditeBean.mesure}">
+                            <f:selectItem itemLabel="Conso" itemValue="0"/>
+                            <f:selectItem itemLabel="Charge" itemValue="0"/>
+                        </p:selectOneButton>
+                    </div>
+                </div>
+                <p:barChart model="#{ChartView.barModel}"/>
+            </div>
+        </div>
     </h:body>
 </html>
