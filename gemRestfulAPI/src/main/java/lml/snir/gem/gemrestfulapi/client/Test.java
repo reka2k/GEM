@@ -11,8 +11,6 @@ import lml.snir.gem.common.metier.entity.CapteurTemperature;
 import lml.snir.gem.common.metier.entity.Chauffage;
 import lml.snir.gem.common.metier.entity.Compteur;
 import lml.snir.gem.common.metier.entity.CompteurContrat;
-import lml.snir.gem.common.metier.entity.Releves;
-import lml.snir.gem.common.metier.entity.Solaire;
 import lml.snir.gem.common.metier.entity.Suivi;
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.gem.common.metier.entity.Vmc;
@@ -20,8 +18,6 @@ import lml.snir.gem.common.metier.transactionel.CapteurHumiditeService;
 import lml.snir.gem.common.metier.transactionel.CapteurTemperatureService;
 import lml.snir.gem.common.metier.transactionel.ChauffageService;
 import lml.snir.gem.common.metier.transactionel.CompteurService;
-import lml.snir.gem.common.metier.transactionel.ReleveService;
-import lml.snir.gem.common.metier.transactionel.SolaireService;
 import lml.snir.gem.common.metier.transactionel.SuiviService;
 import lml.snir.gem.common.metier.transactionel.UserService;
 import lml.snir.gem.common.metier.transactionel.VmcService;
@@ -60,25 +56,8 @@ public class Test {
 
         Vmc v;
         VmcService VmcDataSrv = MetierTransactionelFactory.getVmcService();
-        
-        Releves releve;
-        ReleveService releveService = MetierTransactionelFactory.getReleveService();
-        
-        Solaire solaire;
-        SolaireService solaireService = MetierTransactionelFactory.getSolaireService();
-        
-        
 
         Date date = new Date();
-        
-        releve = new Releves();
-        releve.setDate(date);
-        System.out.println(releve);
-        releveService.add(releve);
-        
-        solaire = new Solaire();
-        solaire.setDatetime(date);
-        solaireService.add(solaire);
 
         u = new User("nom", "prenom", "login", "mdp");
         UserDataSrv.add(u);
@@ -104,7 +83,7 @@ public class Test {
         VmcDataSrv.update(v);
         System.out.println(VmcDataSrv.getById(0));
 
-        s = new Suivi(u, date, "action", v);
+        s = new Suivi(UserDataSrv.getById(u.getId()), date, "action", v);
         SuiviDataSrv.add(s);
         System.out.println(SuiviDataSrv.getByDate(date));
 

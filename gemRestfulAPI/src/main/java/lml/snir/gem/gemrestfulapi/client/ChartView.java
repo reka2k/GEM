@@ -6,15 +6,14 @@
 package lml.snir.gem.gemrestfulapi.client;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.faces.application.FacesMessage;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
-import org.primefaces.model.charts.line.LineChartModel;
 
 /**
  *
@@ -24,78 +23,93 @@ import org.primefaces.model.charts.line.LineChartModel;
 @ApplicationScoped
 public class ChartView implements Serializable {
 
-    private Date date;
-    private SolaireData solaires;
-    private RelevesData releves;
     private BarChartModel barModel;
-    private LineChartModel linemodel;
 
+    @PostConstruct
+    public void init() {
+        createBarModel();
+    }
+    
     public ChartView() {
-        this.date = new Date();
-        this.solaires = new SolaireData();
-        this.solaires.createModelSolaire(this.date);
+        this.createBarModel();
+    }
+
+
+    public void createBarModel() {
+        setBarModel(new BarChartModel());
+        ChartData data = new ChartData();
+
+        BarChartDataSet barDataSet = new BarChartDataSet();
+        barDataSet.setLabel("Consommation quotidienne");
+
+        List<Number> values = new ArrayList<>();
+        int b = 4;
+        for(int a = 0; a<24; a++){
+        values.add(a);
+        b= b+5;
+        }
         
-        this.releves = new RelevesData();
-       // this.releves.createModelReleve(this.date);
-        this.linemodel = this.releves.getLineModel();
-    }
+        barDataSet.setData(values);
 
-    public ChartView(Date date) {
-        this.date = date;
-    }
-    
+        List<String> bgColor = new ArrayList<>();
+        bgColor.add("rgb(0, 79, 250)");
+        
+        barDataSet.setBackgroundColor(bgColor);
 
-    /**
-     * @return the date
-     */
-    public Date getDate() {
-        return date;
-    }
+        List<String> borderColor = new ArrayList<>();
+        borderColor.add("rgb(0, 0, 0)");
+        barDataSet.setBorderColor(borderColor);
+        barDataSet.setBorderWidth(1);
 
-    /**
-     * @param date the date to set
-     */
-    public void setDate(Date date) {
-        this.date = date;
-    }
+        data.addChartDataSet(barDataSet);
 
-    /**
-     * @return the solaires
-     */
-    public SolaireData getSolaires() {
-        return solaires;
-    }
+        List<String> labels = new ArrayList<>();
+        for(int i = 0; i<24; i++){
+        labels.add(Integer.toString(i));
+        }
 
-    /**
-     * @param solaires the solaires to set
-     */
-    public void setSolaires(SolaireData solaires) {
-        this.solaires = solaires;
-    }
+        data.setLabels(labels);
+        this.barModel.setData(data);
 
-    public void afficherGraph() {
-        System.out.println(date);
-        this.releves.setDate(this.date);
-        System.out.println("affgraph " + this.date);
-        this.releves.createModelReleve(this.date);
-        setLinemodel(this.releves.getLineModel());
-
-
-    }
-    
-    public void onDateSelect(SelectEvent<Date> event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-        System.out.println(event.getObject());
+//        //Options
+//        BarChartOptions options = new BarChartOptions();
+//        CartesianScales cScales = new CartesianScales();
+//        CartesianLinearAxes linearAxes = new CartesianLinearAxes();
+//        linearAxes.setOffset(true);
+//        linearAxes.setBeginAtZero(true);
+//        CartesianLinearTicks ticks = new CartesianLinearTicks();
+//        linearAxes.setTicks(ticks);
+//        cScales.addYAxesData(linearAxes);
+//        options.setScales(cScales);
+//
+//        Title title = new Title();
+//        title.setDisplay(true);
+//        title.setText("Bar Chart");
+//        options.setTitle(title);
+//
+//        Legend legend = new Legend();
+//        legend.setDisplay(true);
+//        legend.setPosition("top");
+//        LegendLabel legendLabels = new LegendLabel();
+//        legendLabels.setFontStyle("italic");
+//        legendLabels.setFontColor("#2980B9");
+//        legendLabels.setFontSize(24);
+//        legend.setLabels(legendLabels);
+//        options.setLegend(legend);
+//
+//        // disable animation
+//        Animation animation = new Animation();
+//        animation.setDuration(0);
+//        options.setAnimation(animation);
+//
+//        barModel.setOptions(options);
     }
 
     /**
      * @return the barModel
      */
-    
     public BarChartModel getBarModel() {
-        this.afficherGraph();
+        this.createBarModel();
         return barModel;
     }
 
@@ -106,31 +120,4 @@ public class ChartView implements Serializable {
         this.barModel = barModel;
     }
 
-    /**
-     * @return the linemodel
-     */
-    public LineChartModel getLinemodel() {
-        return linemodel;
-    }
-
-    /**
-     * @param linemodel the linemodel to set
-     */
-    public void setLinemodel(LineChartModel linemodel) {
-        this.linemodel = linemodel;
-    }
-
-    /**
-     * @return the releves
-     */
-    public RelevesData getReleves() {
-        return releves;
-    }
-
-    /**
-     * @param releves the releves to set
-     */
-    public void setReleves(RelevesData releves) {
-        this.releves = releves;
-    }
 }
