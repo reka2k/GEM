@@ -10,6 +10,8 @@
     <class>lml.snir.gem.common.metier.entity.Suivi</class>
     <class>lml.snir.gem.common.metier.entity.User</class>
     <class>lml.snir.gem.common.metier.entity.Vmc</class>
+    <class>lml.snir.gem.common.metier.entity.Releves</class>
+    <class>lml.snir.gem.common.metier.entity.Solaire</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/GEM?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
