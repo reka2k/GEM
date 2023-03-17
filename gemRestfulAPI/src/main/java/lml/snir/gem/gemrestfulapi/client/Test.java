@@ -107,19 +107,21 @@ public class Test {
         s = new Suivi(u, date, "action", v);
         SuiviDataSrv.add(s);
         System.out.println(SuiviDataSrv.getByDate(date));
+        
+        // TODO: Refaire les tests avec la nouvelle entite
 
-        c1 = new Compteur(CompteurContrat.TEMPO, trame, true, true, 0, 0, 0);
-        CompteurDataSrv.add(c1);
-        c1.setFactureJour(0);
-        CompteurDataSrv.update(c1);
-        System.out.println(CompteurDataSrv.getByType(CompteurContrat.TEMPO));
-        CompteurDataSrv.remove(c1);
+//        c1 = new Compteur(CompteurContrat.TEMPO, trame, true, true, 0, 0, 0);
+//        CompteurDataSrv.add(c1);
+//        c1.setFactureJour(0);
+//        CompteurDataSrv.update(c1);
+//        System.out.println(CompteurDataSrv.getByType(CompteurContrat.TEMPO));
+//        CompteurDataSrv.remove(c1);
 
-        c = new Chauffage(true, c1, true, true);
-        ChauffageDataSrv.add(c);
-        c.setCompteur(c1);
-        ChauffageDataSrv.update(c);
-        System.out.println(ChauffageDataSrv.getAll());
+//        c = new Chauffage(true, c1, true, true);
+//        ChauffageDataSrv.add(c);
+//        c.setCompteur(c1);
+//        ChauffageDataSrv.update(c);
+//        System.out.println(ChauffageDataSrv.getAll());
         
         // Fin test -> on supprimte tout
 //        SuiviDataSrv.remove(s);

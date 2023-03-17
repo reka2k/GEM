@@ -7,6 +7,7 @@
 package lml.snir.gem.common.metier.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,135 +26,37 @@ public class Compteur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    //Correspond au type de contrat
-    @Enumerated(EnumType.STRING)
-    private CompteurContrat typeContrat;
-    private String trame;
-    private boolean HC; // Utiliser que si le contrat est le bon
-    private boolean HP; // Utiliser que si le contrat est le bon
-    private float factureJour;
-    private float factureSemaine;
-    private float factureMois;
 
+    private Date date;
     
-    public Compteur(){
+    private float baseHourIndex;
+    private float fullHourIndex; 
+    private float offPeakHourIndex;
+    
+
+    private float maxIntensity; //IMAX
+    private float instantIntensity; //IINST
+    private float subscribeIntensity;
+    private float currentTariffOption; //PTEC
+    
+    
+    
+       public Compteur(){
         
     }
     
-    public Compteur(CompteurContrat typeContrat,String trame,boolean HC,boolean HP,float factureJour,float factureSemaine,float factureMois){
-        this.typeContrat = typeContrat;
-        this.trame = trame;
-        this.HC = HC;
-        this.HP = HP;
-        this.factureJour = factureJour;
-        this.factureSemaine = factureSemaine;
-        this.factureMois = factureMois;
-        
+    public Compteur(Date date, float baseHourIndex, float fullHourIndex, float offPeakHourIndex, float maxIntensity, float instantIntensity, float subscribeIntensity, float currentTariffOption){
+           this.date  = date;
+           this.baseHourIndex = baseHourIndex;
+           this.fullHourIndex = fullHourIndex;
+           this.offPeakHourIndex = offPeakHourIndex;
+           this.maxIntensity = maxIntensity;
+           this.instantIntensity = instantIntensity;
+           this.subscribeIntensity = subscribeIntensity;
+           this.currentTariffOption = currentTariffOption;
     }
     
-    /**
-     * @return the typeContrat
-     */
-    public CompteurContrat getTypeContrat() {
-        return typeContrat;
-    }
-
-    /**
-     * @param typeContrat the typeContrat to set
-     */
-    public void setTypeContrat(CompteurContrat typeContrat) {
-        this.typeContrat = typeContrat;
-    }
-
-    /**
-     * @return the trame
-     */
-    public String getTrame() {
-        return trame;
-    }
-
-    /**
-     * @param trame the trame to set
-     */
-    public void setTrame(String trame) {
-        this.trame = trame;
-    }
-
-    /**
-     * @return the HC
-     */
-    public boolean isHC() {
-        return HC;
-    }
-
-    /**
-     * @param HC the HC to set
-     */
-    public void setHC(boolean HC) {
-        this.HC = HC;
-    }
-
-    /**
-     * @return the HP
-     */
-    public boolean isHP() {
-        return HP;
-    }
-
-    /**
-     * @param HP the HP to set
-     */
-    public void setHP(boolean HP) {
-        this.HP = HP;
-    }
-
-    /**
-     * @return the factureJour
-     */
-    public float getFactureJour() {
-        return factureJour;
-    }
-
-    /**
-     * @param factureJour the factureJour to set
-     */
-    public void setFactureJour(float factureJour) {
-        this.factureJour = factureJour;
-    }
-
-    /**
-     * @return the factureSemaine
-     */
-    public float getFactureSemaine() {
-        return factureSemaine;
-    }
-
-    /**
-     * @param factureSemaine the factureSemaine to set
-     */
-    public void setFactureSemaine(float factureSemaine) {
-        this.factureSemaine = factureSemaine;
-    }
-
-    /**
-     * @return the factureMois
-     */
-    public float getFactureMois() {
-        return factureMois;
-    }
-
-    /**
-     * @param factureMois the factureMois to set
-     */
-    public void setFactureMois(float factureMois) {
-        this.factureMois = factureMois;
-    }
     
-    public String recuperationTrame(String trame){
-        //A completer
-        return trame;
-    }
-
     /**
      * @return the id
      */
@@ -166,5 +69,117 @@ public class Compteur implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * @return the baseHourIndex
+     */
+    public float getBaseHourIndex() {
+        return baseHourIndex;
+    }
+
+    /**
+     * @param baseHourIndex the baseHourIndex to set
+     */
+    public void setBaseHourIndex(float baseHourIndex) {
+        this.baseHourIndex = baseHourIndex;
+    }
+
+    /**
+     * @return the fullHourIndex
+     */
+    public float getFullHourIndex() {
+        return fullHourIndex;
+    }
+
+    /**
+     * @param fullHourIndex the fullHourIndex to set
+     */
+    public void setFullHourIndex(float fullHourIndex) {
+        this.fullHourIndex = fullHourIndex;
+    }
+
+    /**
+     * @return the offPeakHourIndex
+     */
+    public float getOffPeakHourIndex() {
+        return offPeakHourIndex;
+    }
+
+    /**
+     * @param offPeakHourIndex the offPeakHourIndex to set
+     */
+    public void setOffPeakHourIndex(float offPeakHourIndex) {
+        this.offPeakHourIndex = offPeakHourIndex;
+    }
+
+    /**
+     * @return the maxIntensity
+     */
+    public float getMaxIntensity() {
+        return maxIntensity;
+    }
+
+    /**
+     * @param maxIntensity the maxIntensity to set
+     */
+    public void setMaxIntensity(float maxIntensity) {
+        this.maxIntensity = maxIntensity;
+    }
+
+    /**
+     * @return the instantIntensity
+     */
+    public float getInstantIntensity() {
+        return instantIntensity;
+    }
+
+    /**
+     * @param instantIntensity the instantIntensity to set
+     */
+    public void setInstantIntensity(float instantIntensity) {
+        this.instantIntensity = instantIntensity;
+    }
+
+    /**
+     * @return the subscribeIntensity
+     */
+    public float getSubscribeIntensity() {
+        return subscribeIntensity;
+    }
+
+    /**
+     * @param subscribeIntensity the subscribeIntensity to set
+     */
+    public void setSubscribeIntensity(float subscribeIntensity) {
+        this.subscribeIntensity = subscribeIntensity;
+    }
+
+    /**
+     * @return the currentTariffOption
+     */
+    public float getCurrentTariffOption() {
+        return currentTariffOption;
+    }
+
+    /**
+     * @param currentTariffOption the currentTariffOption to set
+     */
+    public void setCurrentTariffOption(float currentTariffOption) {
+        this.currentTariffOption = currentTariffOption;
     }
 }

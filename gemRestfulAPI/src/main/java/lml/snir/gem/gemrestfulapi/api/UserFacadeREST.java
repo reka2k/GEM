@@ -7,6 +7,8 @@ package lml.snir.gem.gemrestfulapi.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.primefaces.shaded.json.JSONObject;
+
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.gem.common.metier.transactionel.UserService;
 import lml.snir.gem.gemrestfulapi.transactionel.MetierTransactionelFactory;
@@ -75,14 +80,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
         } catch (Exception ex) {
             System.out.println(ex);
-            return Response.status(406, "User already exists").type(MediaType.APPLICATION_JSON).build();
+            return Response.status(406).type(MediaType.APPLICATION_JSON).build();
         }
     }
 
     @PUT
     @Path("edit/{id}")
     @Consumes({ MediaType.APPLICATION_JSON })
-    public Response edit(@PathParam("id") Long id, User user) {
+    public Response edit(@PathParam("id") long id, User user) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -100,9 +105,27 @@ public class UserFacadeREST extends AbstractFacade<User> {
         }
     }
 
+    @PUT
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Path("editUserPassword/{id}")
+    public Response editUserPassword(@PathParam("id") long id, String json) {
+        try {
+            User oldUser = this.userService.getById(id);
+            User newUser = new Gson().fromJson(json, User.class);
+            String password = newUser.getMdp();
+            // System.out.println(password);
+            oldUser.setMdp(password);
+            this.userService.update(oldUser);
+            return Response.ok().build();
+        } catch (Exception exception) {
+            System.out.println(exception);
+            return Response.notModified().build();
+        }
+    }
+
     @DELETE
     @Path("remove/{id}")
-    public Response remove(@PathParam("id") Long id) {
+    public Response remove(@PathParam("id") long id) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -124,7 +147,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @GET
     @Path("getById/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
-    public Response getById(@PathParam("id") Long id) {
+    public Response getById(@PathParam("id") long id) {
         try {
             return Response.ok(new Gson().toJson(this.userService.getById(id))).build();
         } catch (Exception e) {
@@ -136,7 +159,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("getAll")
-    public Response findAllUsers() {
+    public Response getAllUsers() {
         try {
             return Response.ok(new Gson().toJson(this.userService.getAll())).build();
         } catch (Exception ex) {
@@ -172,7 +195,8 @@ public class UserFacadeREST extends AbstractFacade<User> {
             User hashedPassword = new User();
             hashedPassword.setMdp(password);
 
-            if (hashedPassword.getMdp() == null ? user.getMdp() == null : hashedPassword.getMdp().equals(user.getMdp())) {
+            if (hashedPassword.getMdp() == null ? user.getMdp() == null
+                    : hashedPassword.getMdp().equals(user.getMdp())) {
                 JsonObject jsonString = factory.createObjectBuilder()
                         .add("auth", true)
                         .add("message", "Authentification succesful")

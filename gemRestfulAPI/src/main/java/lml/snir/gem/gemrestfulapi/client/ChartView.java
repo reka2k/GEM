@@ -76,18 +76,10 @@ public class ChartView implements Serializable {
     public void afficherGraph() {
         System.out.println(date);
         this.releves.setDate(this.date);
-        System.out.println("affgraph " + this.date);
         this.releves.createModelReleve(this.date);
         setLinemodel(this.releves.getLineModel());
 
 
-    }
-    
-    public void onDateSelect(SelectEvent<Date> event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-        System.out.println(event.getObject());
     }
 
     /**

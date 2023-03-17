@@ -32,7 +32,6 @@ public class RelevesData implements Serializable {
     private List<Releves> releves;
     private Date date;
     private LineChartModel lineModel;
-    private DonutChartModel donutModelHeurePleineCreuse;
 
     public RelevesData() {
         date = new Date();
@@ -70,7 +69,7 @@ public class RelevesData implements Serializable {
         LineChartDataSet dataSet = new LineChartDataSet();
         List<Object> values = new ArrayList<>();
 
-        System.out.println(releves);
+        //System.out.println(releves);
 
         if (releves != null) {
 
@@ -110,42 +109,6 @@ public class RelevesData implements Serializable {
 
     }
 
-    public void createDonutModelHeurePleineCreuse(Date date) {
-        try {
-            this.releves = releveSrv.getByDay(date);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        this.donutModelHeurePleineCreuse = new DonutChartModel();
-        ChartData data = new ChartData();
-
-        DonutChartDataSet dataSet = new DonutChartDataSet();
-        List<Number> values = new ArrayList<>();
-        values.add(300);
-        values.add(50);
-        values.add(100);
-
-//        releves.forEach(r -> {
-//                    values.add(r.getBbrhcjb());
-//                });
-        dataSet.setData(values);
-
-        List<String> bgColors = new ArrayList<>();
-        bgColors.add("rgb(255, 99, 132)");
-        bgColors.add("rgb(54, 162, 235)");
-        bgColors.add("rgb(255, 205, 86)");
-        dataSet.setBackgroundColor(bgColors);
-
-        data.addChartDataSet(dataSet);
-        List<String> labels = new ArrayList<>();
-        labels.add("Red");
-        labels.add("Blue");
-        labels.add("Yellow");
-        data.setLabels(labels);
-
-        this.donutModelHeurePleineCreuse.setData(data);
-    }
 
     /**
      * @return the releves
