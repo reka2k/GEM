@@ -5,11 +5,12 @@
  */
 package lml.snir.gem.gemrestfulapi.transactionel;
 
-import lml.snir.gem.common.metier.entity.CapteurTemperature;
 import lml.snir.gem.common.metier.transactionel.CapteurHumiditeService;
 import lml.snir.gem.common.metier.transactionel.CapteurTemperatureService;
 import lml.snir.gem.common.metier.transactionel.ChauffageService;
 import lml.snir.gem.common.metier.transactionel.CompteurService;
+import lml.snir.gem.common.metier.transactionel.ReleveService;
+import lml.snir.gem.common.metier.transactionel.SolaireService;
 import lml.snir.gem.common.metier.transactionel.SuiviService;
 import lml.snir.gem.common.metier.transactionel.UserService;
 import lml.snir.gem.common.metier.transactionel.VmcService;
@@ -19,6 +20,7 @@ import lml.snir.gem.common.metier.transactionel.VmcService;
  * @author lml
  */
 public class MetierTransactionelFactory {
+
     private MetierTransactionelFactory() {}
     
     private static UserService UserSrv = null;
@@ -27,6 +29,18 @@ public class MetierTransactionelFactory {
             UserSrv = new UserServiceImpl();
         }
         return UserSrv;
+    }
+    
+    private static ReleveService releveService = null;
+    public static ReleveService getReleveService() {
+        if(releveService == null) releveService = new ReleveServiceImpl();
+        return releveService;
+    }
+    
+    private static SolaireService solaireService = null;
+    public static SolaireService getSolaireService() {
+        if(solaireService == null) solaireService = new SolaireServiceImpl();
+        return solaireService;
     }
     
     private static CapteurHumiditeService CapteurHumiditeSrv = null;
