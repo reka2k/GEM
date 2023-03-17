@@ -1,0 +1,18 @@
+{
+	"packet": "data_resgisatration",
+	"service": "linky"
+	"data": {
+		/////////////////////
+		jpacket.put("time", Json.createValue(linky.getTime()));
+		jpacket.put("id", Json.createValue(linky.getId()));
+		jpacket.put("subscribe_intensity", Json.createValue(linky.getSubscribeIntensity()));
+		jpacket.put("base_hour_index", Json.createValue(linky.getBaseHourIndex()));
+		jpacket.put("full_hour_index", Json.createValue(linky.getFullHourIndex()));
+		jpacket.put("offpeak_hour_index", Json.createValue(linky.getOffpeakHourIndex()));
+		jpacket.put("max_instensity", Json.createValue(linky.getMaxIntensity()));
+		jpacket.put("instant_intensity", Json.createValue(linky.getInstantIntensity()));
+		jpacket.put("current_tarif_option", Json.createValue(linky.getCurrentTariffOption()));
+		/////////////////////
+	}
+}
+
