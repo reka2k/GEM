@@ -14,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,7 +29,8 @@ public class Compteur implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_time;
     
     private float baseHourIndex;
     private float fullHourIndex; 
@@ -46,7 +49,7 @@ public class Compteur implements Serializable {
     }
     
     public Compteur(Date date, float baseHourIndex, float fullHourIndex, float offPeakHourIndex, float maxIntensity, float instantIntensity, float subscribeIntensity, float currentTariffOption){
-           this.date  = date;
+           this.date_time  = date;
            this.baseHourIndex = baseHourIndex;
            this.fullHourIndex = fullHourIndex;
            this.offPeakHourIndex = offPeakHourIndex;
@@ -75,14 +78,14 @@ public class Compteur implements Serializable {
      * @return the date
      */
     public Date getDate() {
-        return date;
+        return date_time;
     }
 
     /**
      * @param date the date to set
      */
     public void setDate(Date date) {
-        this.date = date;
+        this.date_time = date;
     }
 
     /**
