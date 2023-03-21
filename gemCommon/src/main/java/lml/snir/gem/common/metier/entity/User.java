@@ -5,7 +5,6 @@
  */
 package lml.snir.gem.common.metier.entity;
 
-
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-public class User implements Serializable{
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,17 +32,18 @@ public class User implements Serializable{
     private String login;
     private String mdp;
 
-    public User(){
-        
+    public User() {
+
     }
-    
-     public User(String nom,String prenom,String login,String mdp){
-         this.nom = nom;
-         this.prenom = prenom;
-         this.login = login;
-         this.mdp = hashPassword(mdp);
-        
+
+    public User(String nom, String prenom, String login, String mdp) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.mdp = hashPassword(mdp);
+
     }
+
     /**
      * @return the nom
      */
@@ -96,8 +96,9 @@ public class User implements Serializable{
     /**
      * @param mdp the mdp to set
      */
-    public void setMdp(String mdp) {
-        this.mdp = hashPassword(mdp);
+    public void setMdp(String password) {
+        // System.out.println(password);
+        this.mdp = hashPassword(password);
     }
 
     /**
@@ -115,21 +116,21 @@ public class User implements Serializable{
     }
 
     public static String hashPassword(String password) {
-    String hashedPassword = null;
-    try {
-      MessageDigest md = MessageDigest.getInstance("SHA-256");
-      md.update(password.getBytes());
-      byte[] bytes = md.digest();
-      StringBuilder sb = new StringBuilder();
-      for(int i=0; i< bytes.length ;i++) {
-        sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-      }
-      hashedPassword = sb.toString();
-    } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
-    }
-    return hashedPassword;
+        String hashedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            hashedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return hashedPassword;
 
-}
+    }
 
 }

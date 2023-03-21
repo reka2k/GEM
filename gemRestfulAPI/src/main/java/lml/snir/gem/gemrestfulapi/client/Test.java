@@ -11,6 +11,8 @@ import lml.snir.gem.common.metier.entity.CapteurTemperature;
 import lml.snir.gem.common.metier.entity.Chauffage;
 import lml.snir.gem.common.metier.entity.Compteur;
 import lml.snir.gem.common.metier.entity.CompteurContrat;
+import lml.snir.gem.common.metier.entity.Releves;
+import lml.snir.gem.common.metier.entity.Solaire;
 import lml.snir.gem.common.metier.entity.Suivi;
 import lml.snir.gem.common.metier.entity.User;
 import lml.snir.gem.common.metier.entity.Vmc;
@@ -18,6 +20,8 @@ import lml.snir.gem.common.metier.transactionel.CapteurHumiditeService;
 import lml.snir.gem.common.metier.transactionel.CapteurTemperatureService;
 import lml.snir.gem.common.metier.transactionel.ChauffageService;
 import lml.snir.gem.common.metier.transactionel.CompteurService;
+import lml.snir.gem.common.metier.transactionel.ReleveService;
+import lml.snir.gem.common.metier.transactionel.SolaireService;
 import lml.snir.gem.common.metier.transactionel.SuiviService;
 import lml.snir.gem.common.metier.transactionel.UserService;
 import lml.snir.gem.common.metier.transactionel.VmcService;
@@ -56,8 +60,25 @@ public class Test {
 
         Vmc v;
         VmcService VmcDataSrv = MetierTransactionelFactory.getVmcService();
+        
+        Releves releve;
+        ReleveService releveService = MetierTransactionelFactory.getReleveService();
+        
+        Solaire solaire;
+        SolaireService solaireService = MetierTransactionelFactory.getSolaireService();
+        
+        
 
         Date date = new Date();
+        
+        releve = new Releves();
+        releve.setDate(date);
+        System.out.println(releve);
+        releveService.add(releve);
+        
+        solaire = new Solaire();
+        solaire.setDatetime(date);
+        solaireService.add(solaire);
 
         u = new User("nom", "prenom", "login", "mdp");
         UserDataSrv.add(u);
@@ -83,22 +104,24 @@ public class Test {
         VmcDataSrv.update(v);
         System.out.println(VmcDataSrv.getById(0));
 
-        s = new Suivi(UserDataSrv.getById(u.getId()), date, "action", v);
+        s = new Suivi(u, date, "action", v);
         SuiviDataSrv.add(s);
         System.out.println(SuiviDataSrv.getByDate(date));
+        
+        // TODO: Refaire les tests avec la nouvelle entite
 
-        c1 = new Compteur(CompteurContrat.TEMPO, trame, true, true, 0, 0, 0);
-        CompteurDataSrv.add(c1);
-        c1.setFactureJour(0);
-        CompteurDataSrv.update(c1);
-        System.out.println(CompteurDataSrv.getByType(CompteurContrat.TEMPO));
-        CompteurDataSrv.remove(c1);
+//        c1 = new Compteur(CompteurContrat.TEMPO, trame, true, true, 0, 0, 0);
+//        CompteurDataSrv.add(c1);
+//        c1.setFactureJour(0);
+//        CompteurDataSrv.update(c1);
+//        System.out.println(CompteurDataSrv.getByType(CompteurContrat.TEMPO));
+//        CompteurDataSrv.remove(c1);
 
-        c = new Chauffage(true, c1, true, true);
-        ChauffageDataSrv.add(c);
-        c.setCompteur(c1);
-        ChauffageDataSrv.update(c);
-        System.out.println(ChauffageDataSrv.getAll());
+//        c = new Chauffage(true, c1, true, true);
+//        ChauffageDataSrv.add(c);
+//        c.setCompteur(c1);
+//        ChauffageDataSrv.update(c);
+//        System.out.println(ChauffageDataSrv.getAll());
         
         // Fin test -> on supprimte tout
 //        SuiviDataSrv.remove(s);

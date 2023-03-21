@@ -11,6 +11,18 @@ package lml.snir.gem.gemrestfulapi.physique.data;
  */
 public class PhysiqueDataFactory {
     private static final String PU = "lml.snir.GEM_GEM_war_1.0PU";
+
+    private static ReleveDataService releveDataService = null;
+    public static ReleveDataService getReleveDataService() {
+        if(releveDataService == null) releveDataService = new ReleveDataServiceJPAImpl(PU);
+        return releveDataService;
+    }
+
+    private static SolaireDataService solaireDataService = null;
+    public static SolaireDataService getSolaireDataService() {
+        if(solaireDataService == null) solaireDataService = new SolaireDataServiceJPAImpl(PU);
+        return solaireDataService;
+    }
     
     private PhysiqueDataFactory(){
         
