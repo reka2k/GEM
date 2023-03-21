@@ -70,7 +70,7 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
         return null;
     }
 
-    @GET
+    @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("getByDate")
@@ -83,13 +83,47 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
                 .setPrettyPrinting()
                 .create();
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EE MMM d y HH:mm:ss ZZZ");
+
         try {
             List<Releves> releves = this.releveService.getByDay(date);
+            String jsonReleves = "";
 
             if (releves.isEmpty()) {
                 return Response.noContent().build();
             }
-            return Response.ok(gson.toJson(releves), MediaType.APPLICATION_JSON).type("application/json").build();
+
+            for (int i = 0; i < releves.size(); i++) {
+                String formattedDate = dateFormatter.format(releves.get(i).getDate());
+                if (i == (releves.size() - 1)) {
+                    jsonReleves += "{\n"
+                            + "\"id\": \"" + releves.get(i).getId() + "\"\n"
+                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\"\n"
+                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\"\n"
+                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\"\n"
+                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\"\n"
+                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\"\n"
+                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\"\n"
+                            + "\"papp\": \"" + releves.get(i).getPapp() + "\"\n"
+                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\"\n"
+                            + "\"date\": \"" + formattedDate + "\"\n }\n";
+                } else {
+                    jsonReleves += "{\n"
+                            + "\"id\": \"" + releves.get(i).getId() + "\"\n"
+                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\"\n"
+                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\"\n"
+                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\"\n"
+                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\"\n"
+                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\"\n"
+                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\"\n"
+                            + "\"papp\": \"" + releves.get(i).getPapp() + "\"\n"
+                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\"\n"
+                            + "\"date\": \"" + formattedDate + "\"\n },\n";
+                }
+            }
+
+            String jsonArray = "[\n" + jsonReleves + "\n]";
+            return Response.ok(jsonArray, MediaType.APPLICATION_JSON).type("application/json").build();
 
         } catch (Exception ex) {
             System.out.println(ex);
