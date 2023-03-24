@@ -23,27 +23,26 @@ import org.primefaces.model.charts.line.LineChartModel;
 @ManagedBean(name = "ChartView")
 @ApplicationScoped
 public class ChartView implements Serializable {
-
+    
     private Date date;
     private SolaireData solaires;
     private RelevesData releves;
     private BarChartModel barModel;
     private LineChartModel linemodel;
-
+    
     public ChartView() {
         this.date = new Date();
         this.solaires = new SolaireData();
         this.solaires.createModelSolaire(this.date);
         
         this.releves = new RelevesData();
-       // this.releves.createModelReleve(this.date);
+        // this.releves.createModelReleve(this.date);
         this.linemodel = this.releves.getLineModel();
     }
-
+    
     public ChartView(Date date) {
         this.date = date;
     }
-    
 
     /**
      * @return the date
@@ -72,20 +71,30 @@ public class ChartView implements Serializable {
     public void setSolaires(SolaireData solaires) {
         this.solaires = solaires;
     }
-
+    
     public void afficherGraph() {
-        System.out.println(date);
-        this.releves.setDate(this.date);
-        this.releves.createModelReleve(this.date);
-        setLinemodel(this.releves.getLineModel());
+//        System.out.println(date);
+//        this.releves.setDate(this.date);
+//        System.out.println("affgraph " + this.date);
+//        this.releves.createModelReleve(this.date);
+//        setLinemodel(this.releves.getLineModel());
 
-
+        this.solaires.setDate(this.date);
+        this.solaires.createModelSolaire(this.date);
+        setLinemodel(this.solaires.getLineModel());
+        
+    }
+    
+    public void onDateSelect(SelectEvent<Date> event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+        System.out.println(event.getObject());
     }
 
     /**
      * @return the barModel
      */
-    
     public BarChartModel getBarModel() {
         this.afficherGraph();
         return barModel;

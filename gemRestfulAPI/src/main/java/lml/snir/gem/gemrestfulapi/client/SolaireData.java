@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import lml.snir.gem.common.metier.entity.Solaire;
 import lml.snir.gem.common.metier.transactionel.SolaireService;
 import lml.snir.gem.gemrestfulapi.transactionel.MetierTransactionelFactory;
@@ -23,6 +25,8 @@ import org.primefaces.model.charts.optionconfig.title.Title;
  *
  * @author lml
  */
+@ManagedBean
+@RequestScoped
 public class SolaireData implements Serializable {
 
     private final SolaireService solaireService = MetierTransactionelFactory.getSolaireService();
@@ -68,20 +72,20 @@ public class SolaireData implements Serializable {
         List<Object> peak = new ArrayList<>();
         List<String> labels = new ArrayList<>();
 
-//        getSolaires().forEach((Solaire s) -> {
-//            conso.add(s.getConso());
-//            capaciteBatterie.add(s.getBatteryCapacity());
-//            tension.add(s.getBatteryVoltage());
-//            peak.add(s.getPVPower());
-//            labels.add(formatter.format(s.getDatetime()));
-//        });
-        conso.add(65);
-        conso.add(59);
-        conso.add(80);
-        conso.add(81);
-        conso.add(56);
-        conso.add(55);
-        conso.add(40);
+        getSolaires().forEach((Solaire s) -> {
+            conso.add(s.getConso());
+            capaciteBatterie.add(s.getBatteryCapacity());
+            tension.add(s.getBatteryVoltage());
+            peak.add(s.getPVPower());
+            labels.add(formatter.format(s.getDatetime()));
+        });
+//        conso.add(65);
+//        conso.add(59);
+//        conso.add(80);
+//        conso.add(81);
+//        conso.add(56);
+//        conso.add(55);
+//        conso.add(40);
         
         //Consommation
         dataSet.setData(conso);
@@ -92,37 +96,37 @@ public class SolaireData implements Serializable {
         data.addChartDataSet(dataSet);
         
         
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-        labels.add("May");
-        labels.add("June");
-        labels.add("July");
+//        labels.add("January");
+//        labels.add("February");
+//        labels.add("March");
+//        labels.add("April");
+//        labels.add("May");
+//        labels.add("June");
+//        labels.add("July");
 
         // Capacité Batterie
-//        dataSet2.setData(capaciteBatterie);
-//        dataSet2.setFill(false);
-//        dataSet2.setLabel("Capacité Batterie");
-//        dataSet2.setBorderColor("rgb(0, 228, 0)");
-//        dataSet2.setBackgroundColor("rgb(255, 255, 255)");
-//        data.addChartDataSet(dataSet2);
-//
-//        //Tension Batterie
-//        dataSet3.setData(tension);
-//        dataSet3.setFill(false);
-//        dataSet3.setLabel("Tension Batterie");
-//        dataSet3.setBorderColor("rgb(255, 0, 0)");
-//        dataSet3.setBackgroundColor("rgb(255, 255, 255)");
-//        data.addChartDataSet(dataSet3);
-//
-//        //Peak Voltage
-//        dataSet4.setData(peak);
-//        dataSet4.setFill(false);
-//        dataSet4.setLabel("Peak Voltage");
-//        dataSet4.setBorderColor("rgb(0, 0, 0)");
-//        dataSet4.setBackgroundColor("rgb(255, 255, 255)");
-//        data.addChartDataSet(dataSet4);
+        dataSet2.setData(capaciteBatterie);
+        dataSet2.setFill(false);
+        dataSet2.setLabel("Capacité Batterie");
+        dataSet2.setBorderColor("rgb(0, 228, 0)");
+        dataSet2.setBackgroundColor("rgb(255, 255, 255)");
+        data.addChartDataSet(dataSet2);
+
+        //Tension Batterie
+        dataSet3.setData(tension);
+        dataSet3.setFill(false);
+        dataSet3.setLabel("Tension Batterie");
+        dataSet3.setBorderColor("rgb(255, 0, 0)");
+        dataSet3.setBackgroundColor("rgb(255, 255, 255)");
+        data.addChartDataSet(dataSet3);
+
+        //Peak Voltage
+        dataSet4.setData(peak);
+        dataSet4.setFill(false);
+        dataSet4.setLabel("Peak Voltage");
+        dataSet4.setBorderColor("rgb(0, 0, 0)");
+        dataSet4.setBackgroundColor("rgb(255, 255, 255)");
+        data.addChartDataSet(dataSet4);
         data.setLabels(labels);
 
         //Options
@@ -134,7 +138,7 @@ public class SolaireData implements Serializable {
 
         lineModel.setOptions(options);
         lineModel.setData(data);
-        lineModel.setExtender("chartExtender");
+        //lineModel.setExtender("chartExtender");
 
     }
 

@@ -13,7 +13,6 @@ import lml.snir.gem.gemrestfulapi.api.CapteurHumiditeFacadeREST;
 import lml.snir.gem.gemrestfulapi.api.CapteurTemperatureFacadeREST;
 import lml.snir.gem.gemrestfulapi.api.ChauffageFacadeREST;
 import lml.snir.gem.gemrestfulapi.api.CompteurFacadeREST;
-import lml.snir.gem.gemrestfulapi.api.RelevesFacadeREST;
 import lml.snir.gem.gemrestfulapi.api.SuiviFacadeREST;
 import lml.snir.gem.gemrestfulapi.api.UserFacadeREST;
 import lml.snir.gem.gemrestfulapi.api.VmcFacadeREST;
@@ -28,14 +27,13 @@ public class APIApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> set = new HashSet<>();
-        set.add(CapteurHumiditeFacadeREST.class);
+        set.add( CapteurHumiditeFacadeREST.class );
         set.add(CapteurTemperatureFacadeREST.class);
         set.add(ChauffageFacadeREST.class);
         set.add(CompteurFacadeREST.class);
         set.add(SuiviFacadeREST.class);
         set.add(UserFacadeREST.class);
         set.add(VmcFacadeREST.class);
-        set.add(RelevesFacadeREST.class);
         return set;
     }
 }

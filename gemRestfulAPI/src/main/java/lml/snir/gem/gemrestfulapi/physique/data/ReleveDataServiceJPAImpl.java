@@ -45,5 +45,31 @@ class ReleveDataServiceJPAImpl extends AbstracCrudServiceJPA<Releves> implements
         }
         return releves;
     }
+
+    @Override
+    public List<Releves> getByMonth(Date date) throws Exception {
+        List<Releves> releves = null;
+        try {
+            this.open();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = sdf.format(date);
+            int month =  date.getMonth();
+            Date begin = sdf.parse(strDate);
+            Date end = (Date) begin.clone();
+            end.setMonth(month+1);
+           
+            
+            Query query = em.createQuery("SELECT o FROM Releves o WHERE o.date BETWEEN :fbegin AND :fend");            
+            query.setParameter("fbegin", begin);
+            query.setParameter("fend", end);
+            releves = query.getResultList();
+        } catch (NoResultException ex) {
+            return null;
+        } finally {
+            this.close();
+        }
+        return releves;
+    
+    }
     
 }
