@@ -1,7 +1,7 @@
 import requests
 import json
 import constants
-from datetime import date
+from datetime import datetime
 
 
 class Releves:
@@ -15,7 +15,7 @@ class Releves:
         self.papp = papp
         self.ptec = ptec
         self.date = date
-        self.endpoint = constants.API_ENDPOINT + "/releve"
+        self.endpoint = constants.API_ENDPOINT + "releve"
 
     def releve_to_json(self):
         relevesJson = {
@@ -39,11 +39,12 @@ class Releves:
             response = requests.post(url, json=data)
             return response.json()
         except:
-            print("An exception occured")
+            print("An exception occured: ")
+            print(response.content)
 
 
 def main():
-    date_time = date.today()
+    date_time = datetime.now()
     releve = Releves(0, 0, 0, 0, 0, 0, 330, 0, date_time.isoformat())
     releve.add_releves_to_database()
 
