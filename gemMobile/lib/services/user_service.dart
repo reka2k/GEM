@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:client_mobile/models/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +15,7 @@ class UserService {
 
     if (response.statusCode == 200) {
       var json = response.body;
-      return userFromJson(json);
+      return usersFromJson(json);
     }
     return null;
   }
@@ -27,17 +29,77 @@ class UserService {
     }
   }
 
-  Future<bool> insertUser(User user) async {
-    var url = Uri.parse('${_baseUri}insert');
+  Future<bool> editUser(User user) async {
+    var url = Uri.parse('${_baseUri}edit/${user.id}');
     try {
-      var reponse = await _client.post(url,
+      var response = await _client.put(url,
           headers: {"Content-Type": "application/json"},
           body: userToJson(user));
-      if (reponse.statusCode == 200) return true;
+      print(response.body);
+      if (response.statusCode == 200) return true;
       return false;
     } catch (ex) {
       print(ex);
     }
     return false;
+  }
+
+  Future<bool> insertUser(User user) async {
+    var url = Uri.parse('${_baseUri}insert');
+    try {
+      var response = await _client.post(url,
+          headers: {"Content-Type": "application/json"},
+          body: userToJson(user));
+      if (response.statusCode == 200) return true;
+      return false;
+    } catch (ex) {
+      print(ex);
+    }
+    return false;
+  }
+
+  Future<bool> authenticateUser(String login, String password) async {
+    Uri url = Uri.parse('${_baseUri}auth/$login-$password');
+    try {
+      var response = await _client.get(url);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        if (data["auth"]["valueType"] == "TRUE") {
+          return true;
+        }
+        return false;
+      }
+      return false;
+    } catch (ex) {
+      print(ex);
+    }
+    return false;
+  }
+
+  Future<bool> editUserPassword(User user) async {
+    var url = Uri.parse('${_baseUri}editUserPassword/${user.id}');
+    try {
+      var response = await _client.put(url,
+          headers: {"Content-Type": "application/json"},
+          body: userToJson(user));
+      if (response.statusCode == 200) return true;
+      return false;
+    } catch (ex) {
+      print(ex);
+    }
+    return false;
+  }
+
+  Future<User?> getUserByLogin(String login) async {
+    var url = Uri.parse('${_baseUri}getByLogin/${login}');
+    try {
+      var response = await _client.get(url);
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        return userFromJson(response.body);
+      }
+    } catch (ex) {
+      print(ex);
+    }
+    return null;
   }
 }

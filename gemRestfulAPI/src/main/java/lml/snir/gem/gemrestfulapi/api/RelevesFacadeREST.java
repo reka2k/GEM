@@ -83,7 +83,7 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
                 .setPrettyPrinting()
                 .create();
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("EE MMM d y HH:mm:ss ZZZ");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("YYYY-MM-dd HH:MM:SS");
 
         try {
             List<Releves> releves = this.releveService.getByDay(date);
@@ -97,27 +97,27 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
                 String formattedDate = dateFormatter.format(releves.get(i).getDate());
                 if (i == (releves.size() - 1)) {
                     jsonReleves += "{\n"
-                            + "\"id\": \"" + releves.get(i).getId() + "\"\n"
-                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\"\n"
-                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\"\n"
-                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\"\n"
-                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\"\n"
-                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\"\n"
-                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\"\n"
-                            + "\"papp\": \"" + releves.get(i).getPapp() + "\"\n"
-                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\"\n"
+                            + "\"id\": " + releves.get(i).getId() + ",\n"
+                            + "\"bbrhcjb\": " + releves.get(i).getBbrhcjb() + ",\n"
+                            + "\"bbrhpjb\": " + releves.get(i).getBbrhpjb() + ",\n"
+                            + "\"bbrhcjw\": " + releves.get(i).getBbrhcjw() + ",\n"
+                            + "\"bbrhpjw\": " + releves.get(i).getBbrhpjw() + ",\n"
+                            + "\"bbrhcjr\": " + releves.get(i).getBbrhcjr() + ",\n"
+                            + "\"bbrhpjr\": " + releves.get(i).getBbrhpjr() + ",\n"
+                            + "\"papp\": " + releves.get(i).getPapp() + ",\n"
+                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\",\n"
                             + "\"date\": \"" + formattedDate + "\"\n }\n";
                 } else {
                     jsonReleves += "{\n"
-                            + "\"id\": \"" + releves.get(i).getId() + "\"\n"
-                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\"\n"
-                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\"\n"
-                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\"\n"
-                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\"\n"
-                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\"\n"
-                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\"\n"
-                            + "\"papp\": \"" + releves.get(i).getPapp() + "\"\n"
-                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\"\n"
+                            + "\"id\": " + releves.get(i).getId() + ",\n"
+                            + "\"bbrhcjb\": " + releves.get(i).getBbrhcjb() + ",\n"
+                            + "\"bbrhpjb\": " + releves.get(i).getBbrhpjb() + ",\n"
+                            + "\"bbrhcjw\": " + releves.get(i).getBbrhcjw() + ",\n"
+                            + "\"bbrhpjw\": " + releves.get(i).getBbrhpjw() + ",\n"
+                            + "\"bbrhcjr\": " + releves.get(i).getBbrhcjr() + ",\n"
+                            + "\"bbrhpjr\": " + releves.get(i).getBbrhpjr() + ",\n"
+                            + "\"papp\": " + releves.get(i).getPapp() + ",\n"
+                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\",\n"
                             + "\"date\": \"" + formattedDate + "\"\n },\n";
                 }
             }

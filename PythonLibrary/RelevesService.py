@@ -27,7 +27,8 @@ class Releves:
             "bbrhpjr": self.bbrhpjr,
             "papp": self.papp,
             "ptec": self.ptec,
-            "date": self.date}
+            "date": self.date
+        }
         return json.dumps(relevesJson)
 
     # Adds measurements to DB, returns response status code
