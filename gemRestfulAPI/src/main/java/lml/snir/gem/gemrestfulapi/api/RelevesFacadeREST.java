@@ -18,6 +18,7 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -56,11 +57,29 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
     public void create(Releves entity) {
     }
 
-    @GET
-    @Path("{id}")
+    @POST
+    @Path("/add")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Releves find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public Response add(String jsonString) {
+        Releves releve = new Gson().fromJson(jsonString, Releves.class);
+        
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        final Map<String, ?> config = Collections.emptyMap();
+        JsonBuilderFactory factory = Json.createBuilderFactory(config);
+        try {
+            
+            this.releveService.add(releve);
+            JsonObject json = factory.createObjectBuilder().add("message", "Data inserted successfully").build();
+            return Response.ok(gson.toJson(json), MediaType.APPLICATION_JSON).type("application/json").build();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return Response.status(406).type(MediaType.APPLICATION_JSON).build();
+        }
     }
 
     @GET
@@ -83,7 +102,7 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
                 .setPrettyPrinting()
                 .create();
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("EE MMM d y HH:mm:ss ZZZ");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ");
 
         try {
             List<Releves> releves = this.releveService.getByDay(date);
@@ -97,28 +116,28 @@ public class RelevesFacadeREST extends AbstractFacade<Releves> {
                 String formattedDate = dateFormatter.format(releves.get(i).getDate());
                 if (i == (releves.size() - 1)) {
                     jsonReleves += "{\n"
-                            + "\"id\": \"" + releves.get(i).getId() + "\"\n"
-                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\"\n"
-                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\"\n"
-                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\"\n"
-                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\"\n"
-                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\"\n"
-                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\"\n"
-                            + "\"papp\": \"" + releves.get(i).getPapp() + "\"\n"
-                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\"\n"
-                            + "\"date\": \"" + formattedDate + "\"\n }\n";
+                            + "\"id\": \"" + releves.get(i).getId() + "\",\n"
+                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\",\n"
+                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\",\n"
+                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\",\n"
+                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\",\n"
+                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\",\n"
+                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\",\n"
+                            + "\"papp\": \"" + releves.get(i).getPapp() + "\",\n"
+                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\",\n"
+                            + "\"date\": \"" + formattedDate + "\",\n }\n";
                 } else {
                     jsonReleves += "{\n"
-                            + "\"id\": \"" + releves.get(i).getId() + "\"\n"
-                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\"\n"
-                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\"\n"
-                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\"\n"
-                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\"\n"
-                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\"\n"
-                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\"\n"
-                            + "\"papp\": \"" + releves.get(i).getPapp() + "\"\n"
-                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\"\n"
-                            + "\"date\": \"" + formattedDate + "\"\n },\n";
+                            + "\"id\": \"" + releves.get(i).getId() + "\",\n"
+                            + "\"bbrhcjb\": \"" + releves.get(i).getBbrhcjb() + "\",\n"
+                            + "\"bbrhpjb\": \"" + releves.get(i).getBbrhpjb() + "\",\n"
+                            + "\"bbrhcjw\": \"" + releves.get(i).getBbrhcjw() + "\",\n"
+                            + "\"bbrhpjw\": \"" + releves.get(i).getBbrhpjw() + "\",\n"
+                            + "\"bbrhcjr\": \"" + releves.get(i).getBbrhcjr() + "\",\n"
+                            + "\"bbrhpjr\": \"" + releves.get(i).getBbrhpjr() + "\",\n"
+                            + "\"papp\": \"" + releves.get(i).getPapp() + "\",\n"
+                            + "\"ptec\": \"" + releves.get(i).getPtec() + "\",\n"
+                            + "\"date\": \"" + formattedDate + "\",\n },\n";
                 }
             }
 

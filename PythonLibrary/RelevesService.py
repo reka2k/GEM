@@ -1,7 +1,7 @@
 import requests
 import json
 import constants
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class Releves:
@@ -32,11 +32,12 @@ class Releves:
 
     # Adds measurements to DB, returns response status code
     def add_releves_to_database(self):
+        headers = {"Content-Type": "application/json"}
         url = self.endpoint + "/add"
         data = self.releve_to_json()
-        print("releveJson: " + data)
         try:
-            response = requests.post(url, json=data)
+            response = requests.post(url, data=data, headers=headers)
+            print(response.request.body, response.request.headers)
             return response.json()
         except:
             print("An exception occured: ")
@@ -44,8 +45,8 @@ class Releves:
 
 
 def main():
-    date_time = datetime.now()
-    releve = Releves(0, 0, 0, 0, 0, 0, 330, 0, date_time.isoformat())
+    date_time = datetime.now().replace(tzinfo=timezone.utc)
+    releve = Releves(0, 0, 0, 0, 0, 0, 389, 0, date_time.isoformat())
     releve.add_releves_to_database()
 
 
