@@ -2,8 +2,13 @@
 //     final user = userFromJson(jsonString);
 import 'dart:convert';
 
-List<User> userFromJson(String str) =>
+List<User> usersFromJson(String str) =>
     List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
+
+User userFromJson(String str) {
+  var users = List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
+  return users[0];
+}
 
 String usersToJson(List<User> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

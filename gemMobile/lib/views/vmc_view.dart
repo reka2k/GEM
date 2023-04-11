@@ -3,6 +3,7 @@ import 'package:client_mobile/models/capteur_humidite.dart';
 import 'package:client_mobile/models/capteur_temperature.dart';
 import 'package:client_mobile/models/vmc.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class VmcPage extends StatefulWidget {
   const VmcPage({super.key});
@@ -32,6 +33,7 @@ class _VmcPageState extends State<VmcPage> {
   //func qui recupere les donnees
   getData() async {
     dynamic tempVmcs = await VmcController().getAllVmc();
+    isLoaded = false;
 
     if (tempVmcs != null) {
       setState(() {
@@ -76,7 +78,9 @@ class _VmcPageState extends State<VmcPage> {
     return Scaffold(
       body: Visibility(
         visible: isLoaded,
-        replacement: const Center(child: CircularProgressIndicator()),
+        replacement: Center(
+            child: LoadingAnimationWidget.fourRotatingDots(
+                color: Colors.green, size: 100)),
         child: RefreshIndicator(
           onRefresh: _refresh,
           child: ListView.builder(
