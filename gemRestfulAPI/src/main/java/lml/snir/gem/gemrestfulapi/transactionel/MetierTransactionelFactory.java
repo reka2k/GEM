@@ -11,7 +11,6 @@ import lml.snir.gem.common.metier.transactionel.ChauffageService;
 import lml.snir.gem.common.metier.transactionel.CompteurService;
 import lml.snir.gem.common.metier.transactionel.ReleveService;
 import lml.snir.gem.common.metier.transactionel.SolaireService;
-import lml.snir.gem.common.metier.transactionel.SuiviService;
 import lml.snir.gem.common.metier.transactionel.UserService;
 import lml.snir.gem.common.metier.transactionel.VmcService;
 
@@ -75,13 +74,6 @@ public class MetierTransactionelFactory {
         return CompteurSrv;
     }
     
-    private static SuiviService SuiviSrv = null;
-    public synchronized static SuiviService getSuiviService(){
-        if(SuiviSrv == null){
-            SuiviSrv = new SuiviServiceImpl();
-        }
-        return SuiviSrv;
-    }
     
     private static VmcService VmcSrv = null;
     public synchronized static VmcService getVmcService(){
