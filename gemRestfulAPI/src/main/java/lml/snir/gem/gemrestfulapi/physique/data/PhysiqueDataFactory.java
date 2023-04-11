@@ -48,11 +48,6 @@ public class PhysiqueDataFactory {
         return chauffageDataService;
     }
     
-    private static SuiviDataService SuiviDataService = null;
-    public synchronized static SuiviDataService getSuiviDataService(){
-        if(SuiviDataService == null) SuiviDataService = new SuiviDataServiceJPAImpl(PU);
-        return SuiviDataService;
-    }
     
     private static UserDataService UserDataService = null;
     public synchronized static UserDataService getUserDataService(){
