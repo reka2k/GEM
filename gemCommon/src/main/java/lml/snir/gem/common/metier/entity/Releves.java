@@ -191,18 +191,11 @@ public class Releves implements Serializable {
         return true;
     }
 
-//    @Override
-//    public String toString() {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        return '"date": ' + sdf.format(date) + ',' +  
-//        'bbrhcjb:' + bbrhcjb + ','
-//        'bbrhpjb:' + bbrhpjb
-//        'bbrhcjw:' + bbrhcjw
-//        'bbrhpjw:' + bbrhpjw
-//        'bbrhcjr:' + bbrhcjr
-//        'bbrhpjr:' + bbrhpjr
-//        'papp:' + papp
-//        'ptec:' + ptec
-//    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return "Le " + sdf.format(date) + " " +  this.papp;
+    }
     
 }

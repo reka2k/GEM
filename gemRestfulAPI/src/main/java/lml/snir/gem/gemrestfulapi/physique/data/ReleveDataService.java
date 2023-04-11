@@ -12,4 +12,5 @@ import lml.snir.persistence.CrudService;
  */
 public interface ReleveDataService extends CrudService<Releves>{
     public List<Releves> getByDay(Date date) throws Exception;
+    public List<Releves> getByMonth(Date date) throws Exception;
 }

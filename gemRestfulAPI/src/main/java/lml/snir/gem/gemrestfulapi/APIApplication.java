@@ -28,7 +28,7 @@ public class APIApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> set = new HashSet<>();
-        set.add(CapteurHumiditeFacadeREST.class);
+        set.add( CapteurHumiditeFacadeREST.class );
         set.add(CapteurTemperatureFacadeREST.class);
         set.add(ChauffageFacadeREST.class);
         set.add(CompteurFacadeREST.class);
@@ -36,6 +36,7 @@ public class APIApplication extends Application {
         set.add(VmcFacadeREST.class);
         set.add(RelevesFacadeREST.class);
         set.add(SolaireFacadeREST.class);
+
         return set;
     }
 }

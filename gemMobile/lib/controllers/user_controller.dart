@@ -14,6 +14,22 @@ class UserController extends ChangeNotifier {
   }
 
   insertUser(User user) async {
-    return UserService().insertUser(user);
+    return await UserService().insertUser(user);
+  }
+
+  authenticateUser(String login, String password) async {
+    return await UserService().authenticateUser(login, password);
+  }
+
+  editUser(User user) async {
+    return await UserService().editUser(user);
+  }
+
+  editUserPassword(User user) async {
+    return await UserService().editUserPassword(user);
+  }
+
+  Future<User?> getUserByLogin(String login) async {
+    return await UserService().getUserByLogin(login);
   }
 }

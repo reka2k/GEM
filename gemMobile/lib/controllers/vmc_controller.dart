@@ -1,4 +1,3 @@
-import 'package:client_mobile/services/user_service.dart';
 import 'package:client_mobile/services/vmc_service.dart';
 import 'package:flutter/material.dart';
 

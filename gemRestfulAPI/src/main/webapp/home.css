@@ -19,14 +19,15 @@ body{
 }
 img {
     overflow: hidden;
-    margin-top: 2vh;
+    margin: 3vh;
+    width: 12vw;
 }
 
 .content {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 5vh;
+    margin-top: 3vh;
 }
 
 label {
@@ -38,6 +39,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2vh;
 }
 
 .ui-chart {
