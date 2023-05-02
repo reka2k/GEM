@@ -1,7 +1,5 @@
 #background {
     background-image:url(bg.svg);
-    opacity: 0.5;
-    backdrop-filter:blur(10px);
     background-size: cover;
     background-repeat: space;
     overflow: hidden;
@@ -23,25 +21,54 @@ img {
     width: 12vw;
 }
 
-.content {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 3vh;
-}
-
 label {
     font: caption;
-    margin: 3px;
-}
-
-.selection-form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2vh;
+    margin: 5px;
+    color: black;
+    font-size: x-large;
 }
 
 .ui-chart {
-    width: 60vw;
+    width: 70vw;
+}
+
+body .ui-card {
+    border-radius: 0px !important;
+    background-color: antiquewhite;
+    box-shadow: 6px 8px 0px sandybrown;
+}
+
+.facture {
+    font-size: xxx-large;
+    margin: 10px;
+}
+
+body .ui-selectonebutton>.ui-button.ui-state-hover,
+body .ui-selectonemenu.ui-state-hover,
+body .ui-inputfield.ui-state-hover {
+     border-color: green;
+}
+
+body .ui-selectonebutton>.ui-button.ui-state-focus,
+body .ui-selectonemenu.ui-state-focus,
+body .ui-inputfield.ui-state-focus {
+    border-color: green;
+    box-shadow: 0px 0px 3px 1px green;
+}
+
+body .ui-selectonebutton>.ui-button.ui-state-active:not(.ui-state-disabled):hover,
+body .ui-selectonebutton>.ui-button.ui-state-active {
+    background: green;
+    color: white;
+    border-color: green;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-items .ui-selectonemenu-item.ui-state-highlight {
+    background: green;
+    color: white;
+}
+
+body .ui-datepicker .ui-datepicker-calendar td>a.ui-state-active, body .ui-datepicker .ui-datepicker-calendar td>span.ui-state-active {
+    background: green;
+    color: white;
 }

@@ -2,108 +2,154 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html"/>
     <h:head>
-        <title>Home - GEM ━╤デ╦︻(▀̿̿Ĺ̯̿̿▀̿ ̿)</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+        <link rel="icon" href="logo1.png"/>
+        <title>GEM - Home</title>
         <link rel="stylesheet" type="text/css" href="home.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.1/chartjs-adapter-moment.min.js" integrity="sha512-hVy4KxCKgnXi2ok7rlnlPma4JHXI1VPQeempoaclV1GwRHrDeaiuS1pI6DVldaj5oh6Opy2XJ2CTljQLPkaMrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     </h:head>
-    <div id="background"></div>
-    <header>
-        <div>
-            <h:graphicImage url="#{resource['logo2.png']}"/>
-        </div>
-    </header>
-    <h:body>
-        <h:form >
-            <p:growl id="msg"/>
-            <div class="content">
-                <div>
-                    <div class="selection-form">
-                        <div>
-                            <h:outputLabel value="Pick date"/>
-                            <br></br>
-                            <p:datePicker id="date" value="#{ChartView.date}" onchange="#{ChartView.afficherGraph()}" style="margin: auto;">
-                                <p:ajax event="dateSelect" update="graph" listener="#{ChartView.afficherGraph()}"/>
-                            </p:datePicker> &nbsp;&nbsp;
-                            <br></br>
-                            <p:datePicker id="date1" value="#{calculFactureBean.date}" onchange="#{ChartView.afficherGraph()}" style="margin: auto;">
-                                <p:ajax event="dateSelect" update="graph" listener="#{ChartView.afficherGraph()}"/>
-                            </p:datePicker> &nbsp;&nbsp;
-                            
-                            <h:outputLabel value="Type de contrat"/>
-                            <p:selectOneMenu id="typeContrat1" value="#{calculFactureBean.typeContrat}" >
-                                <f:selectItem itemLabel="--Séléctionnez--" itemValue="0"/>
-                                <f:selectItem itemLabel="BASE" itemValue= "base"/>
-                                <f:selectItem itemLabel="TEMPO--6kVA" itemValue= "tempo6"/>
-                                <f:selectItem itemLabel="TEMPO--9kVA" itemValue= "tempo9"/>
-                                <f:selectItem itemLabel="TEMPO--12kVA" itemValue= "tempo12"/>
-                                <f:selectItem itemLabel="TEMPO--15kVA" itemValue= "tempo15"/>
-                                <f:selectItem itemLabel="TEMPO--18kVA" itemValue= "tempo18"/>
-                                <f:selectItem itemLabel="TEMPO--30kVA" itemValue= "tempo30"/>
-                                <f:selectItem itemLabel="TEMPO--36kVA" itemValue= "tempo36"/>
-                                <f:selectItem itemLabel="HC/HP" itemValue= "hchp"/>
-                                <p:ajax event="itemSelect" update="graph" listener="#{ChartView.afficherGraph()}"/>
-                                <f:facet name="footer">
-                                    <p:divider styleClass="mt-0" />
-                                    <h:outputText value="3 options" style="font-weight:bold;"/>
-                                </f:facet>
-                            </p:selectOneMenu>
+    <h:outputScript>
+        function chartExtender() {
+        //Copie la config des options dans une var
+        var options = $.extend(true, {}, this.cfg.config);
 
+        options = {
+        data: {
+        tension: 0.1,
+        },
+        options: {
+        elements: {
+        point: {
+        radius: 0,
+        },
+        },
+        scales: {
+        x: {
+        type: 'time',
+        time: {
+        unit: 'hour',
+        displayFormats: {
+        hour: 'HH:mm',
+        },
+        },
+        },
+        },
+        },
+        };
+
+        //merge all options into the main chart options
+        $.extend(true, this.cfg.config, options);
+        }
+
+        function percentageLabels() {
+        var options = {
+        plugins: [ChartDataLabels],
+        options: {
+        plugins: {
+        // Change options for ALL labels of THIS CHART
+        datalabels: {
+        formatter: (value, ctx) => {
+        let sum = 0;
+        let dataArr = ctx.chart.data.datasets[0].data;
+        dataArr.map((data) => {
+        sum += data;
+        });
+        let percentage = ((value * 100) / sum).toFixed(2) + '%';
+        return percentage;
+        },
+        },
+        },
+        },
+        };
+
+        //merge all options into the main chart options
+        $.extend(true, this.cfg.config, options);
+        }
+    </h:outputScript>
+    <h:panelGroup layout="block" id="background"/>
+    <h:body>
+        <h:form>
+            <div style="display: flex; justify-content: space-evenly; padding-top: 10vh;">
+                <div>
+                    <div style="margin-top: -40px;margin-left: -20px;">
+                        <h:graphicImage url="#{'logotext1.png'}"/>
+                    </div>
+                    <p:card style="height: 150px; margin-top: 80px; margin-bottom: 80px;">
+                        <div>
 
                         </div>
                         <div>
-                            <h:outputLabel value="Choose graph"/>
+                            <h:outputLabel value="Contract : "/>                            
+                            <p:selectOneMenu id="typeContrat" value="#{ChartView.typeContrat}" style="margin-top: -10px;">                                
+                                <f:selectItem itemLabel="Base - 3kVA" itemValue= "base3"/>
+                                <f:selectItem itemLabel="Base - 6kVA" itemValue= "base6"/>
+                                <f:selectItem itemLabel="Base - 9kVA" itemValue= "base9"/>
+                                <f:selectItem itemLabel="Base - 12kVA" itemValue= "base12"/>
+                                <f:selectItem itemLabel="Base - 15kVA" itemValue= "base15"/>
+                                <f:selectItem itemLabel="Base - 18kVA" itemValue= "base18"/>
+                                <f:selectItem itemLabel="Base - 24kVA" itemValue= "base24"/>
+                                <f:selectItem itemLabel="Base - 30kVA" itemValue= "base30"/>
+                                <f:selectItem itemLabel="Base - 36kVA" itemValue= "base36"/>                              
+                                <f:selectItem itemLabel="Tempo - 6kVA" itemValue= "tempo6"/>
+                                <f:selectItem itemLabel="Tempo - 9kVA" itemValue= "tempo9"/>
+                                <f:selectItem itemLabel="Tempo - 12kVA" itemValue= "tempo12"/>
+                                <f:selectItem itemLabel="Tempo - 15kVA" itemValue= "tempo15"/>
+                                <f:selectItem itemLabel="Tempo - 18kVA" itemValue= "tempo18"/>
+                                <f:selectItem itemLabel="Tempo - 30kVA" itemValue= "tempo30"/>
+                                <f:selectItem itemLabel="Tempo - 36kVA" itemValue= "tempo36"/>
+                                <f:selectItem itemLabel="HC/HP - 6kVA" itemValue= "hchp6"/>
+                                <f:selectItem itemLabel="HC/HP - 9kVA" itemValue= "hchp9"/>
+                                <f:selectItem itemLabel="HC/HP - 12kVA" itemValue= "hchp12"/>
+                                <f:selectItem itemLabel="HC/HP - 15kVA" itemValue= "hchp15"/>
+                                <f:selectItem itemLabel="HC/HP - 18kVA" itemValue= "hchp18"/>
+                                <f:selectItem itemLabel="HC/HP - 24kVA" itemValue= "hchp24"/>
+                                <f:selectItem itemLabel="HC/HP - 30kVA" itemValue= "hchp30"/>
+                                <f:selectItem itemLabel="HC/HP - 36kVA" itemValue= "hchp36"/>
+                                <p:ajax event="change" update="facture" listener="#{ChartView.calculFacture()}"/>                                
+                            </p:selectOneMenu>
                             <br></br>
-                            <p:selectOneButton style="margin-top: 3px" value="#{capteurHumiditeBean.mesure}">
-                                <f:selectItem itemLabel="Conso" itemValue="0"/>
-                                <f:selectItem itemLabel="Charge" itemValue="0"/>
+                            <h:outputLabel id="facture" class="facture" value="#{ChartView.resultat} €" style="margin-top: 10px;"/>
+                        </div>
+                    </p:card>
+                    <p:card style="height: 150px;">
+                        <div>                  
+                            <h:outputLabel value="VMC Speed"/>
+                            <br></br>
+                            <p:selectOneButton style="margin-top: 10px;" value="#{vmcBean.statut}">
+                                <f:selectItem itemLabel="OFF" itemValue="1"/>
+                                <f:selectItem itemLabel="SLOW" itemValue="2"/>
+                                <f:selectItem itemLabel="FAST" itemValue="3"/>
                             </p:selectOneButton>
                         </div>
-                    </div>
-                    <p:lineChart id="graph" model="#{ChartView.linemodel}" rendered="true" style="width: 100%; height: 70vh;"/>
+                    </p:card>
                 </div>
                 <div>
-
-                    <div>
-                        <h:outputLabel value="VMC"/>
-                        <br></br>
-                        <p:selectOneButton style="margin-top: 3px" value="#{vmcBean.statut}">
-                            <f:selectItem itemLabel="OFF" itemValue="1"/>
-                            <f:selectItem itemLabel="SLOW" itemValue="2"/>
-                            <f:selectItem itemLabel="FAST" itemValue="3"/>
-                        </p:selectOneButton>
-                    </div>
-                    <br></br>
-                    <div>
-                        <p:button value="Facture du Jour" styleClass="severities-button ui-button-success" 
-                                  onclick="#{calculFactureBean.calculFactureJourTempo(date)}"
-                                  onchange="#{calculFactureBean.result}"
-                                   />&nbsp;&nbsp;
-                        <p:button value="Facture du mois" styleClass="severities-button ui-button-success"  />
-                    </div>
-                    <br></br>
-                    <div>
-                        <h:outputLabel id="facture" value="#{calculFactureBean.result}"/>
-                    </div>
+                    <p:card>
+                        <div style="margin-left: 40px; margin-bottom: -40px">
+                            <div>
+                                <h:outputLabel for="date" value="Date"/>
+                            </div>
+                            <div>
+                                <p:datePicker id="date"
+                                              value="#{ChartView.date}"
+                                              style="width: 100px;">                                   
+                                    <p:ajax event="dateSelect" update="graph, facture" listener="#{ChartView.afficherGraph()}"/>
+                                </p:datePicker>
+                            </div>
+                        </div>
+                        <div>
+                            <p:lineChart id="graph" 
+                                         model="#{ChartView.linemodel}" 
+                                         rendered="true"/>
+                        </div>
+                    </p:card>
                 </div>
             </div>
         </h:form>
     </h:body>
-
-    <!-- 
-              ____          
-            ／＞　 フ          
-           | 　_　_|          
-          ／` ミ＿xノ           
-         /　　　　 |           
-        /　 ヽ　　 ﾉ           
-       │　　 |　|　|           
-    ／￣|　　 |　|　|            
-   |  (￣ヽ＿_ヽ_)__)          
-   ＼二)
-            
-            ^^ ELGATO ^^
-    -->
 </html>

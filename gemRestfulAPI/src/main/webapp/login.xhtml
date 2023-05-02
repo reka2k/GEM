@@ -5,30 +5,31 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>(ﾒ` ﾛ ´)︻デ═一 Log In - GEM</title>
+        <title>GEM - Log In</title>
+        <link rel="icon" href="logo1.jpg"></link>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="login.css"/>
     </h:head>
     <h:body>      
-        <div id="glass">
-            <form>
-                <span class="title"><label>Hi, welcome to GEM.<br></br></label></span>
+        <p:card>
+            <h:form>
+                <span class="title"><label>Hi, welcome to GEM.</label></span>
                 <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                <div style='align-items: center'>
+                <div style='margin: 25px;'>
                     <span class="form-label"><label>Login</label></span>                    
-                    <br></br>
-                    <p:inputText class="form-input" id="login" placeholder="example@test"/>
+                     <br></br>
+                     <p:inputText class="form-input" id="login" placeholder="example@test" value="#{userBean.login}"/>
                     <br></br>
                     <span class="form-label"><label>Password</label></span>
                     <br></br>
-                    <p:password class="form-input" id="password" placeholder="qwerty1234"/>
+                    <p:password class="form-input" id="password" placeholder="qwerty1234" value="#{userBean.mdp}" toggleMask="true"/>
                     <br></br>
                     <br></br>
                     <span class="form-btn">
-                        <p:commandButton styleClass="ui-button-severities ui-button-success" value="Connexion" style="width: 100%;"/>
+                        <p:commandButton styleClass="ui-button-severities ui-button-success" value="Connexion" action="#{userBean.checkAndRedirect()}" style="width: 100%;"/>
                     </span>
                 </div>
-            </form>
-        </div>
+            </h:form>
+        </p:card>
     </h:body>
 </html>
