@@ -111,93 +111,101 @@ class _CompteurPageState extends State<CompteurPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Visibility(
-          visible: isLoaded,
-          replacement: LoadingAnimationWidget.threeRotatingDots(
-              color: Colors.green, size: 100),
-          child: Scaffold(
-            body: RefreshIndicator(
-                onRefresh: () => _refresh(),
-                child: Column(children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15))),
-                    margin: const EdgeInsets.only(bottom: 10),
-                    padding: const EdgeInsets.only(top: 40),
-                    height: 80,
-                    child: Center(
-                      child: InkWell(
-                        onTap: () => _selectDate(context),
-                        child: Text(
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24),
-                            "Current date: ${DateFormat.yMMMMd().format(selectedDate)}"),
-                      ),
-                    ),
-                  ),
-                  Container(
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                      margin: const EdgeInsets.only(top: 10, bottom: 30),
-                      height: 500,
-                      child: SolaireChart(data: data)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DropdownMenu<TypeContrats>(
-                        enableSearch: true,
-                        leadingIcon: const Icon(Icons.note_add),
-                        hintText: "Contract",
-                        label: null,
-                        menuHeight: 300,
-                        width: 200,
-                        dropdownMenuEntries: getContractsList(),
-                        onSelected: (newContract) {
-                          setState(() {
-                            typeContrat = newContract!;
-                          });
-                          getFacture(selectedDate);
-                        },
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 35),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.green),
-                        width: 130,
-                        height: 60,
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(top: 3),
-                                child: const Text(
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                    "Daily bill:"),
-                              ),
-                              Text(
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
-                                  "$facture €"),
-                            ],
-                          ),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: Visibility(
+            visible: isLoaded,
+            replacement: LoadingAnimationWidget.threeRotatingDots(
+                color: Colors.green, size: 100),
+            child: Scaffold(
+              body: RefreshIndicator(
+                  onRefresh: () => _refresh(),
+                  child: Column(children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15))),
+                      margin: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(top: 40),
+                      height: 80,
+                      child: Center(
+                        child: InkWell(
+                          onTap: () => _selectDate(context),
+                          child: Text(
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24),
+                              "Current date: ${DateFormat.yMMMMd().format(selectedDate)}"),
                         ),
                       ),
-                    ],
-                  ),
-                ])),
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5)),
+                        margin: const EdgeInsets.only(top: 10, bottom: 30),
+                        height: 500,
+                        child: SolaireChart(data: data)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownMenu<TypeContrats>(
+                          leadingIcon: const Icon(Icons.note_add),
+                          hintText: "Contract",
+                          label: null,
+                          menuHeight: 300,
+                          width: 200,
+                          dropdownMenuEntries: getContractsList(),
+                          onSelected: (newContract) {
+                            setState(() {
+                              typeContrat = newContract!;
+                            });
+                            getFacture(selectedDate);
+                          },
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 35),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.green),
+                          width: 130,
+                          height: 60,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(top: 3),
+                                  child: const Text(
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                      "Daily bill:"),
+                                ),
+                                Text(
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30),
+                                    "$facture €"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ])),
+            ),
           ),
         ),
       ),

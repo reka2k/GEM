@@ -106,102 +106,118 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        bottom: false,
-        child: loadingBallAppear
-            ? const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30.0),
-                child: HomePage())
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 70),
-                      TweenAnimationBuilder<double>(
-                        duration: const Duration(milliseconds: 300),
-                        tween: Tween(begin: 1, end: _elementsOpacity),
-                        builder: (_, value, __) => Opacity(
-                          opacity: value,
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          bottom: false,
+          child: loadingBallAppear
+              ? const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30.0),
+                  child: HomePage())
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 70),
+                        TweenAnimationBuilder<double>(
+                          duration: const Duration(milliseconds: 300),
+                          tween: Tween(begin: 1, end: _elementsOpacity),
+                          builder: (_, value, __) => Opacity(
+                            opacity: value,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.waving_hand_outlined,
+                                    size: 60, color: Color(0xff21579C)),
+                                const SizedBox(height: 25),
+                                const Text(
+                                  "Welcome,",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 35),
+                                ),
+                                Text(
+                                  "Sign in to continue",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 35),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 50),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(Icons.waving_hand_outlined,
-                                  size: 60, color: Color(0xff21579C)),
-                              const SizedBox(height: 25),
-                              const Text(
-                                "Welcome,",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 35),
+                              LoginField(
+                                  fadeLogin: _elementsOpacity == 0,
+                                  loginController: loginController),
+                              const SizedBox(height: 40),
+                              PasswordField(
+                                  fadePassword: _elementsOpacity == 0,
+                                  passwordController: passwordController),
+                              const SizedBox(height: 60),
+                              GetStartedButton(
+                                elementsOpacity: _elementsOpacity,
+                                onTap: () async {
+                                  var res = await authenticateUser();
+                                  if (res) {
+                                    widget.notifyParent(
+                                        loginController.text.trim());
+                                    setState(() {
+                                      isLoggedIn = true;
+                                      _elementsOpacity = 0;
+                                    });
+                                  } else {
+                                    // ignore: use_build_context_synchronously
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'Verifiez vos coordonnees')));
+                                  }
+                                },
+                                onAnimatinoEnd: () async {
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 500));
+                                  setState(() {
+                                    loadingBallAppear = true;
+                                  });
+                                },
                               ),
-                              Text(
-                                "Sign in to continue",
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.7),
-                                    fontSize: 35),
-                              ),
+                              Center(
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: Colors.lightBlue[100],
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: InkWell(
+                                    onTap: () => showAlertDialog(context),
+                                    child: const Text(
+                                        "Can't log in? Click here to change properties.",
+                                        maxLines: 1),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 50),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                          children: [
-                            LoginField(
-                                fadeLogin: _elementsOpacity == 0,
-                                loginController: loginController),
-                            const SizedBox(height: 40),
-                            PasswordField(
-                                fadePassword: _elementsOpacity == 0,
-                                passwordController: passwordController),
-                            const SizedBox(height: 60),
-                            GetStartedButton(
-                              elementsOpacity: _elementsOpacity,
-                              onTap: () async {
-                                var res = await authenticateUser();
-                                if (res) {
-                                  widget.notifyParent(
-                                      loginController.text.trim());
-                                  setState(() {
-                                    isLoggedIn = true;
-                                    _elementsOpacity = 0;
-                                  });
-                                } else {
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              'Verifiez vos coordonnees')));
-                                }
-                              },
-                              onAnimatinoEnd: () async {
-                                await Future.delayed(
-                                    const Duration(milliseconds: 500));
-                                setState(() {
-                                  loadingBallAppear = true;
-                                });
-                              },
-                            ),
-                            Center(
-                              child: InkWell(
-                                onTap: () => showAlertDialog(context),
-                                child: const Text(
-                                    "Can't log in? Click here to change properties.",
-                                    maxLines: 1),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
+        ),
       ),
     );
   }

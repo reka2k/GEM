@@ -17,10 +17,8 @@ class ConfigService {
     try {
       final configFile = await _localConfigFile;
 
-      //Read the file
       final config = await configFile.readAsString();
 
-      print(jsonDecode(config));
       return jsonDecode(config);
     } catch (e) {
       return null;

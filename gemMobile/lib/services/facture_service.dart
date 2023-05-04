@@ -156,6 +156,8 @@ class FactureService {
 
   _calculFactureHCHP(DateTime date) async {
     await _getRelevesData();
+    return 0;
+    // TODO: FAIRE LE CALCUL DE FACTURE HEURES PLEINES/CREUSES !!!
   }
 
   _calculFactureBase(DateTime date) async {

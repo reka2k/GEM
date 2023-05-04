@@ -29,10 +29,8 @@ class _SolaireChartState extends State<SolaireChart> {
             enable: true,
           ),
           primaryXAxis: DateTimeAxis(),
-          series: <CartesianSeries<Solaire, DateTime>>[
-            SplineAreaSeries<Solaire, DateTime>(
-                borderColor: Colors.green[700],
-                borderWidth: 2,
+          series: <SplineSeries<Solaire, DateTime>>[
+            SplineSeries<Solaire, DateTime>(
                 name: "Consommation",
                 color: Colors.green,
                 dataSource: widget.data,
