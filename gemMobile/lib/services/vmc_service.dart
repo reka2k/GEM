@@ -1,14 +1,15 @@
 import 'package:client_mobile/models/vmc.dart';
+import 'package:client_mobile/services/config.dart';
 import 'package:http/http.dart' as http;
 
 class VmcService {
   final _client = http.Client();
-  static final _baseUri =
-      Uri.parse("http://172.16.79.128:8080/gemRestfulAPI-1.0/api/vmc/");
 
   Future<List<Vmc>?> getAllVmc() async {
-    var url = Uri.parse(
-        '${_baseUri}getAll'); // on concatene la fonction voulu a l'URI de base
+    String address = await _address;
+    int port = await _port;
+    Uri url = Uri.parse(
+        "http://$address:$port/gemRestfulAPI-1.0/api/vmc/getAll"); // on concatene la fonction voulu a l'URI de base
     var response = await _client.get(url);
 
     if (response.statusCode == 200) {
@@ -19,7 +20,10 @@ class VmcService {
   }
 
   void removeVmc(id) async {
-    var url = Uri.parse('${_baseUri}remove/$id');
+    String address = await _address;
+    int port = await _port;
+    Uri url =
+        Uri.parse("http://$address:$port/gemRestfulAPI-1.0/api/vmc/remove/$id");
     try {
       await _client.delete(url);
     } catch (ex) {
@@ -28,7 +32,10 @@ class VmcService {
   }
 
   Future<bool> insertVmc(Vmc vmc) async {
-    var url = Uri.parse('${_baseUri}insert');
+    String address = await _address;
+    int port = await _port;
+    Uri url =
+        Uri.parse("http://$address:$port/gemRestfulAPI-1.0/api/vmc/insert");
     try {
       var reponse = await _client.post(url,
           headers: {"Content-Type": "application/json"}, body: vmcToJson(vmc));
@@ -38,5 +45,13 @@ class VmcService {
       print(ex);
     }
     return false;
+  }
+
+  Future<String> get _address async {
+    return await ConfigService().address;
+  }
+
+  Future<int> get _port async {
+    return await ConfigService().port;
   }
 }

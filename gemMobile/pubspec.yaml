@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.5
   loading_animation_widget: ^1.2.0+4
   syncfusion_flutter_charts: ^20.4.54
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:

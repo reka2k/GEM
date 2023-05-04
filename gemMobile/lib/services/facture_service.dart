@@ -154,7 +154,9 @@ class FactureService {
     }
   }
 
-  _calculFactureHCHP(DateTime date) {}
+  _calculFactureHCHP(DateTime date) async {
+    await _getRelevesData();
+  }
 
   _calculFactureBase(DateTime date) async {
     await _getRelevesData();

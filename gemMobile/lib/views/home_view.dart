@@ -1,8 +1,6 @@
 import 'package:client_mobile/controllers/user_controller.dart';
 import 'package:client_mobile/views/login_view.dart';
 import 'package:client_mobile/views/settings_view.dart';
-import 'package:client_mobile/views/user_view.dart';
-import 'package:client_mobile/views/vmc_view.dart';
 import 'package:flutter/material.dart';
 
 import '../models/user.dart';

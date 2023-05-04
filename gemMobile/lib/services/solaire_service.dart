@@ -1,15 +1,16 @@
 import 'package:http/http.dart' as http;
 
 import '../models/solaire.dart';
+import 'config.dart';
 
 class SolaireService {
   final _client = http.Client();
-  static final _baseUri =
-      Uri.parse("http://172.16.79.128:8080/gemRestfulAPI-1.0/api/solaire/");
 
   Future<List<Solaire>?> getSolairesByDate(DateTime date) async {
-    var url = Uri.parse('${_baseUri}getByDate');
-    print("$url : {'date': '${date.year}-${date.month}-${date.day}'}");
+    String address = await _address;
+    int port = await _port;
+    Uri url = Uri.parse(
+        "http://$address:$port/gemRestfulAPI-1.0/api/solaire/getByDate");
     var response = await _client.post(url,
         headers: {"Content-Type": "application/json"},
         body: "{'date': '${date.year}-${date.month}-${date.day}'}");
@@ -18,5 +19,13 @@ class SolaireService {
       return listSolaireFromJson(response.body);
     }
     return null;
+  }
+
+  Future<String> get _address async {
+    return await ConfigService().address;
+  }
+
+  Future<int> get _port async {
+    return await ConfigService().port;
   }
 }

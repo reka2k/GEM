@@ -3,14 +3,17 @@ import 'dart:convert';
 import 'package:client_mobile/models/user.dart';
 import 'package:http/http.dart' as http;
 
+import 'config.dart';
+
 class UserService {
   final _client = http.Client();
-  static final _baseUri =
-      Uri.parse("http://172.16.79.128:8080/gemRestfulAPI-1.0/api/user/");
 
   Future<List<User>?> getAllUsers() async {
-    var url = Uri.parse(
-        '${_baseUri}getAll'); // on concatene la fonction voulu a l'URI de base
+    String address = await _address;
+    int port = await _port;
+    Uri url =
+        Uri.parse("http://$address:$port/gemRestfulAPI-1.0/api/user/getAll");
+
     var response = await _client.get(url);
 
     if (response.statusCode == 200) {
@@ -21,7 +24,10 @@ class UserService {
   }
 
   void removeUser(id) async {
-    var url = Uri.parse('${_baseUri}remove/$id');
+    String address = await _address;
+    int port = await _port;
+    Uri url = Uri.parse(
+        "http://$address:$port/gemRestfulAPI-1.0/api/user/remove/$id");
     try {
       await _client.delete(url);
     } catch (ex) {
@@ -30,12 +36,15 @@ class UserService {
   }
 
   Future<bool> editUser(User user) async {
-    var url = Uri.parse('${_baseUri}edit/${user.id}');
+    String address = await _address;
+    int port = await _port;
+    Uri url = Uri.parse(
+        "http://$address:$port/gemRestfulAPI-1.0/api/user/edit/${user.id}");
     try {
       var response = await _client.put(url,
           headers: {"Content-Type": "application/json"},
           body: userToJson(user));
-      print(response.body);
+
       if (response.statusCode == 200) return true;
       return false;
     } catch (ex) {
@@ -45,7 +54,10 @@ class UserService {
   }
 
   Future<bool> insertUser(User user) async {
-    var url = Uri.parse('${_baseUri}insert');
+    String address = await _address;
+    int port = await _port;
+    var url =
+        Uri.parse('http://$address:$port/gemRestfulAPI-1.0/api/user/insert');
     try {
       var response = await _client.post(url,
           headers: {"Content-Type": "application/json"},
@@ -59,7 +71,10 @@ class UserService {
   }
 
   Future<bool> authenticateUser(String login, String password) async {
-    Uri url = Uri.parse('${_baseUri}auth/$login-$password');
+    String address = await _address;
+    int port = await _port;
+    Uri url = Uri.parse(
+        'http://$address:$port/gemRestfulAPI-1.0/api/user/auth/$login-$password');
     try {
       var response = await _client.get(url);
       if (response.statusCode == 200) {
@@ -77,7 +92,10 @@ class UserService {
   }
 
   Future<bool> editUserPassword(User user) async {
-    var url = Uri.parse('${_baseUri}editUserPassword/${user.id}');
+    String address = await _address;
+    int port = await _port;
+    var url = Uri.parse(
+        'http://$address:$port/gemRestfulAPI-1.0/api/user/editUserPassword/${user.id}');
     try {
       var response = await _client.put(url,
           headers: {"Content-Type": "application/json"},
@@ -91,7 +109,10 @@ class UserService {
   }
 
   Future<User?> getUserByLogin(String login) async {
-    var url = Uri.parse('${_baseUri}getByLogin/${login}');
+    String address = await _address;
+    int port = await _port;
+    var url = Uri.parse(
+        'http://$address:$port/gemRestfulAPI-1.0/api/user/getByLogin/$login');
     try {
       var response = await _client.get(url);
       if (response.statusCode == 200 && response.body.isNotEmpty) {
@@ -101,5 +122,13 @@ class UserService {
       print(ex);
     }
     return null;
+  }
+
+  Future<String> get _address async {
+    return await ConfigService().address;
+  }
+
+  Future<int> get _port async {
+    return await ConfigService().port;
   }
 }

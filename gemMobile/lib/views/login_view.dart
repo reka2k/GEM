@@ -1,4 +1,5 @@
 import 'package:client_mobile/controllers/user_controller.dart';
+import 'package:client_mobile/services/config.dart';
 import 'package:client_mobile/views/home_view.dart';
 import 'package:flutter/material.dart';
 
@@ -15,20 +16,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late TextEditingController loginController;
-  late TextEditingController passwordController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final loginController = TextEditingController();
+  final passwordController = TextEditingController();
+  late var formAddressController = TextEditingController();
+  late var formPortController = TextEditingController();
   double _elementsOpacity = 1;
   bool loadingBallAppear = false;
   double loadingBallSize = 1;
   bool isLoggedIn = false;
-
-  @override
-  void initState() {
-    loginController = TextEditingController();
-    passwordController = TextEditingController();
-
-    super.initState();
-  }
 
   authenticateUser() async {
     String login = loginController.text.trim();
@@ -41,6 +37,71 @@ class _LoginScreenState extends State<LoginScreen> {
       return true;
     }
     return false;
+  }
+
+  changeServerProperties() async {
+    if (formAddressController.text.isNotEmpty &&
+        formPortController.text.isNotEmpty) {
+      String newAddress = formAddressController.text;
+      int newPort = int.parse(formPortController.text);
+
+      ConfigService().writeConfigFile(newAddress, newPort);
+    }
+  }
+
+  showAlertDialog(BuildContext context) async {
+    var tmp = await ConfigService().port;
+    var port = "$tmp";
+
+    formAddressController.text = await ConfigService().address;
+    formPortController.text = port;
+
+    Widget cancelButton = TextButton(
+      onPressed: () => Navigator.of(context).pop(false),
+      child: const Text("Cancel"),
+    );
+
+    Widget saveButton = TextButton(
+        onPressed: () {
+          changeServerProperties();
+          Navigator.of(context).pop(true);
+        },
+        child: const Text("Save"));
+
+    Widget addressInput = TextFormField(
+      autocorrect: false,
+      controller: formAddressController,
+      validator: (value) {
+        return value!.isNotEmpty ? null : "Please enter an IP address";
+      },
+      decoration: const InputDecoration(label: Text("Address")),
+    );
+
+    Widget portInput = TextFormField(
+      autocorrect: false,
+      controller: formPortController,
+      validator: (value) {
+        return value!.isNotEmpty ? null : "Please enter a port";
+      },
+      decoration: const InputDecoration(label: Text("Port")),
+    );
+
+    AlertDialog alert = AlertDialog(
+        title: const Text("Properties"),
+        content: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [addressInput, portInput],
+          ),
+        ),
+        actions: <Widget>[cancelButton, saveButton]);
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 
   @override
@@ -125,6 +186,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   loadingBallAppear = true;
                                 });
                               },
+                            ),
+                            Center(
+                              child: InkWell(
+                                onTap: () => showAlertDialog(context),
+                                child: const Text(
+                                    "Can't log in? Click here to change properties.",
+                                    maxLines: 1),
+                              ),
                             )
                           ],
                         ),
