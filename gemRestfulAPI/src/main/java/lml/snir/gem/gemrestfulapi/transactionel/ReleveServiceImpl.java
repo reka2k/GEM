@@ -25,6 +25,11 @@ public class ReleveServiceImpl implements ReleveService{
     public List<Releves> getByDay(Date date) throws Exception {
         return releveDataSrv.getByDay(date);
     }
+    
+    @Override
+    public List<Releves> getByMonth(Date date) throws Exception {
+        return releveDataSrv.getByMonth(date);
+    }
 
     @Override
     public Releves add(Releves t) throws Exception {
